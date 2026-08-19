@@ -1,0 +1,1070 @@
+{
+	"cdmVersionRange" : ">=5.0.0",
+	"PrimaryCriteria" : {
+		"CriteriaList" : [
+			{
+				"DrugExposure" : {
+					"CodesetId" : 1,
+					"DrugTypeExclude" : false
+				}
+			}
+		],
+		"ObservationWindow" : {
+			"PriorDays" : 0,
+			"PostDays" : 0
+		},
+		"PrimaryCriteriaLimit" : {
+			"Type" : "First"
+		}
+	},
+	"ConceptSets" : [
+		{
+			"id" : 1,
+			"name" : "[IMAGINE] Denosumab",
+			"expression" : {
+				"items" : [
+					{
+						"concept" : {
+							"CONCEPT_ID" : 1588119,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000191959",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDFRT",
+							"CONCEPT_CLASS_ID" : "Chemical Structure"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21310227,
+							"CONCEPT_NAME" : "Denosumab 60mg/1ml solution for injection pre-filled syringes",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "17313111000001106",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "dm+d",
+							"CONCEPT_CLASS_ID" : "VMP"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 40487874,
+							"CONCEPT_NAME" : "Denosumab-containing product",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446457007",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Pharma/Biol Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45122741,
+							"CONCEPT_NAME" : "1 ML denosumab 60 MG/ML Prefilled Syringe [Prolia]",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "55513071001",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "11-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44147970,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "DPD134052",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "DPD",
+							"CONCEPT_CLASS_ID" : "Ingredient"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45414015,
+							"CONCEPT_NAME" : "denosumab 120 mg/1.7 mL subcutaneous solution",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "26658",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "Multum",
+							"CONCEPT_CLASS_ID" : "Multum"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 40487406,
+							"CONCEPT_NAME" : "Denosumab 60 mg/mL solution for injection",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446347007",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Pharma/Biol Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36112363,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "1eb2261f-f3f1-41cd-ba75-2251fbf7b509",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45665563,
+							"CONCEPT_NAME" : "PROLIA - denosumab injection",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "49e5afe9-a0c7-40c4-af9f-f287a80c5c88",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36113434,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "b25a925e-0ec6-4acb-acfc-97ce569cb280",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45897659,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "ea51fac5-649a-42de-bbf8-350abc07ae80",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44928317,
+							"CONCEPT_NAME" : "denosumab 120 mg/1.7mL INJECTION [XGEVA]",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "055513730",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "9-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 3192985,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446321003",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "Nebraska Lexicon",
+							"CONCEPT_CLASS_ID" : "Substance"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45410340,
+							"CONCEPT_NAME" : "denosumab 60 mg/mL subcutaneous solution",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "26272",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "Multum",
+							"CONCEPT_CLASS_ID" : "Multum"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 1356835,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "36b653db-2775-4291-8c3f-ada3e1e8a597",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36107809,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "7e6d0267-e0a9-41f5-b4fc-b6bb690348bd",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 37494299,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "50e77d20-8cd8-430b-98fb-edb645941fe7",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 1606673,
+							"CONCEPT_NAME" : "DENOSUMAB",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "4030131",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "VANDF",
+							"CONCEPT_CLASS_ID" : "Drug Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35903377,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "200442f1-57b8-4671-80f2-1fcc80f59551",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44406376,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "f0a4aa32-b689-4a2a-b575-7b3156e79c0c",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45693860,
+							"CONCEPT_NAME" : "XGEVA - denosumab injection",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "628f0998-1206-4001-aeee-18133aa9f3bf",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 3318702,
+							"CONCEPT_NAME" : "Denosumab therapy",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "700139004",
+							"DOMAIN_ID" : "Procedure",
+							"VOCABULARY_ID" : "Nebraska Lexicon",
+							"CONCEPT_CLASS_ID" : "Procedure"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 3202763,
+							"CONCEPT_NAME" : "Denosumab product",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446457007",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "Nebraska Lexicon",
+							"CONCEPT_CLASS_ID" : "Pharma/Biol Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 40487378,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446321003",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Substance"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42518886,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "792b698f-2d91-47c0-8d51-e412ffcf5ed3",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21604169,
+							"CONCEPT_NAME" : "denosumab; parenteral",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "M05BX04",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "ATC",
+							"CONCEPT_CLASS_ID" : "ATC 5th"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42822129,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "f6d71df8-75cf-45ff-9b25-0e70969559df",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 37205928,
+							"CONCEPT_NAME" : "Denosumab-containing product in parenteral dose form",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "785475006",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Drug Form"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42864483,
+							"CONCEPT_NAME" : "DENOSUMAB 60MG/ML INJ,SYRINGE,1ML",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000181797",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "VA Product",
+							"CONCEPT_CLASS_ID" : "VA Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 795924,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "1dc757ce-c06c-4669-ad85-35181469b2ed",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 37206471,
+							"CONCEPT_NAME" : "Denosumab only product in parenteral dose form",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "786173002",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Drug Form"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 40228709,
+							"CONCEPT_NAME" : "DENOSUMAB",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000181718",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDFRT",
+							"CONCEPT_CLASS_ID" : "Pharma Preparation"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42864484,
+							"CONCEPT_NAME" : "DENOSUMAB 60MG/ML INJ",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000181798",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "VA Product",
+							"CONCEPT_CLASS_ID" : "VA Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 46242811,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "a6976e7d-145d-45f1-bd2d-34f2bdf123cc",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 1187076,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "c2d0c693-b774-4ba4-a4d7-2ef73fd7b3b1",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45802994,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "f23bd1e9-1b2a-42ed-b6a9-2198cff4f659",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36175501,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION [prolia]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "fc54627f-e2f1-4512-a0c3-0cf15cf774e7",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45509362,
+							"CONCEPT_NAME" : "Denosumab therapy",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "8BPW.00",
+							"DOMAIN_ID" : "Procedure",
+							"VOCABULARY_ID" : "Read",
+							"CONCEPT_CLASS_ID" : "Read"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36174698,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "e7bc4713-3090-4983-b7b3-95c2549a52db",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42850073,
+							"CONCEPT_NAME" : "DENOSUMAB 120 MG/1.7 ML INJ",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000184131",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "VA Product",
+							"CONCEPT_CLASS_ID" : "VA Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35835686,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "201abd85-c4ed-424f-8e79-ca1c34368d06",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36678071,
+							"CONCEPT_NAME" : "Denosumab only product",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "775477008",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Pharma/Biol Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21254219,
+							"CONCEPT_NAME" : "Denosumab 120mg/1.7ml solution for injection vials",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "19448111000001109",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "dm+d",
+							"CONCEPT_CLASS_ID" : "VMP"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21243337,
+							"CONCEPT_NAME" : "Denosumab 60mg/1ml solution for injection pre-filled syringes 1 pre-filled disposable injection",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "17301711000001109",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "dm+d",
+							"CONCEPT_CLASS_ID" : "VMPP"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 40664827,
+							"CONCEPT_NAME" : "Injection, denosumab, 1 mg",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "J0897",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "HCPCS",
+							"CONCEPT_CLASS_ID" : "HCPCS"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45838216,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "555130730",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "9-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 38002949,
+							"CONCEPT_NAME" : "Inj, denosumab",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "9272",
+							"DOMAIN_ID" : "Observation",
+							"VOCABULARY_ID" : "APC",
+							"CONCEPT_CLASS_ID" : "APC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45763680,
+							"CONCEPT_NAME" : "Denosumab therapy",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "700139004",
+							"DOMAIN_ID" : "Procedure",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Procedure"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44402112,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "cc2e2eb7-73d4-4773-8e87-24a6775d9d4b",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 42850072,
+							"CONCEPT_NAME" : "DENOSUMAB 70MG/ML INJ",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "N0000182432",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "VA Product",
+							"CONCEPT_CLASS_ID" : "VA Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44911427,
+							"CONCEPT_NAME" : "denosumab 60 mg/mL INJECTION [Prolia]",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "055513710",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "9-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35111914,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "92ed95b8-243b-4e2a-8f93-4d44d507c2c6",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21261785,
+							"CONCEPT_NAME" : "Denosumab 120mg/1.7ml solution for injection vials 1 vial",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "19376011000001101",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "dm+d",
+							"CONCEPT_CLASS_ID" : "VMPP"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 21216131,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446321003",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "dm+d",
+							"CONCEPT_CLASS_ID" : "Ingredient"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 44952545,
+							"CONCEPT_NAME" : "1.7 ML denosumab 70 MG/ML Injection [Xgeva]",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "55513073001",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "11-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 28498,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "D000069448",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "MeSH",
+							"CONCEPT_CLASS_ID" : "Main Heading"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45838215,
+							"CONCEPT_NAME" : "denosumab 60mg/mL SUBCUTANEOUS INJECTION",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "555130710",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "NDC",
+							"CONCEPT_CLASS_ID" : "9-digit NDC"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 45795438,
+							"CONCEPT_NAME" : "denosumab 120mg/1.7mL SUBCUTANEOUS INJECTION [xgeva]",
+							"STANDARD_CONCEPT" : "C",
+							"STANDARD_CONCEPT_CAPTION" : "Classification",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "a7793a46-924e-4995-83b2-7a277a467013",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "SPL",
+							"CONCEPT_CLASS_ID" : "Prescription Drug"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 3187938,
+							"CONCEPT_NAME" : "Denosumab 60mg/mL solution for injection",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "446347007",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "Nebraska Lexicon",
+							"CONCEPT_CLASS_ID" : "Pharma/Biol Product"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 43228337,
+							"CONCEPT_NAME" : "Denosumab",
+							"STANDARD_CONCEPT" : "N",
+							"STANDARD_CONCEPT_CAPTION" : "Non-Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "51765",
+							"DOMAIN_ID" : "Drug",
+							"VOCABULARY_ID" : "BDPM",
+							"CONCEPT_CLASS_ID" : "Ingredient"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					}
+				]
+			}
+		}
+	],
+	"QualifiedLimit" : {
+		"Type" : "First"
+	},
+	"ExpressionLimit" : {
+		"Type" : "First"
+	},
+	"InclusionRules" : [],
+	"EndStrategy" : {
+		"CustomEra" : {
+			"DrugCodesetId" : 1,
+			"GapDays" : 180,
+			"Offset" : 0
+		}
+	},
+	"CensoringCriteria" : [],
+	"CollapseSettings" : {
+		"CollapseType" : "ERA",
+		"EraPad" : 0
+	},
+	"CensorWindow" : {}
+}

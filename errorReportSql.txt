@@ -1,0 +1,40 @@
+DBMS:
+redshift
+
+Error:
+java.lang.NullPointerException: fields must be non-null
+
+SQL:
+  WITH ranked_times AS (
+      SELECT
+          cohort_definition_id,
+          checksum,
+          start_time,
+          end_time,
+          ROW_NUMBER() OVER (PARTITION BY cohort_definition_id  ORDER BY end_time  DESC ) AS rank
+      FROM
+          marketscan_ccaemdcr_aug2025_results.cohortBPA_checksum
+     WHERE end_time IS NOT NULL
+  )
+  SELECT cohort_definition_id, checksum, start_time, end_time
+  FROM ranked_times
+  WHERE rank = 1;
+  
+
+R version:
+R version 4.3.3 (2024-02-29)
+
+Platform:
+x86_64-pc-linux-gnu
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- PioneerBPA (0.1.0)

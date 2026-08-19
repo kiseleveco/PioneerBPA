@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS #bpa_join;
+
+SELECT
+  t.*,
+  bpa.cohort_start_date AS bpa_start_date,
+  bpa.cohort_end_date   AS bpa_end_date,
+  CASE
+    WHEN bpa.cohort_definition_id = @bpa_za        THEN 'ZA'
+    WHEN bpa.cohort_definition_id = @bpa_denosumab THEN 'Denosumab'
+  END AS bpa_type
+INTO #bpa_join
+FROM @cohort_database_schema.@target_table t
+LEFT JOIN @cohort_database_schema.@cohort_table bpa
+  ON  bpa.subject_id           = t.subject_id
+  AND bpa.cohort_definition_id IN (@bpa_za, @bpa_denosumab)
+  AND bpa.cohort_start_date    >= DATEADD(DAY, -30, t.bone_date);
+
+DROP TABLE IF EXISTS @cohort_database_schema.@target_table;
+
+SELECT *
+INTO @cohort_database_schema.@target_table
+FROM #bpa_join;
+
+DROP TABLE IF EXISTS #bpa_join;

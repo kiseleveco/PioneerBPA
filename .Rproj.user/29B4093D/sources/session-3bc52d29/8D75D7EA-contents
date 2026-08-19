@@ -1,0 +1,373 @@
+source("../credentials.r")
+
+# ------------------------------------------------------------------------------
+# 1. Site-specific parameters  (edit these for every site)
+# ------------------------------------------------------------------------------
+
+JDBC <- "/home/a_kiselev/Jdbc"
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms        = DBMS,
+  user        = USER,
+  password    = PASSWORD,
+  server      = SERVER,
+  port        = DB_PORT,
+  pathToDriver = JDBC
+)
+
+
+## -- Schema names -------------------------------------------------------------
+cdmDatabaseSchema        <- "marketscan_ccaemdcr_aug2025"# read-only CDM
+vocabularyDatabaseSchema <- cdmDatabaseSchema     # usually same as CDM
+cohortDatabaseSchema     <- "marketscan_ccaemdcr_aug2025_results"        # write-enabled; needs read/write/delete
+cohortTable              <- "cohortBPA"
+databaseId          <- "MarketScan"           # short identifier, no spaces
+databaseName        <- "MarketScan aug2025"
+databaseDescription <- "MarketScan aug2025"
+outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA"))
+
+## -- Temp table emulation (Oracle / some Spark configs) -----------------------
+options(sqlRenderTempEmulationSchema = NULL)
+
+## Cohorts definitions
+target_metastasis <- 1768
+target_bones <- 1769
+bpa_za <- 1770
+bpa_denosumab <- 1771
+adt <- 1772
+arpi <- 1773
+chemo <- 1774
+cohortTableNew <- "cohortTableNew"
+target_table <- "targetTable"
+
+## Generate cohorts
+
+includeCohortStats <- FALSE
+incrementalCohorts <- TRUE
+
+generateStudyCohorts(
+  connectionDetails        = connectionDetails,
+  cdmDatabaseSchema        = cdmDatabaseSchema,
+  vocabularyDatabaseSchema = vocabularyDatabaseSchema,
+  cohortDatabaseSchema     = cohortDatabaseSchema,
+  cohortTable              = cohortTable,
+  outputFolder             = outputFolder,
+  incremental              = incrementalCohorts,
+  includeCohortStats       = includeCohortStats
+)
+
+## Combine metastasis + bone
+connection <- DatabaseConnector::connect(connectionDetails)
+sql <- SqlRender::loadRenderTranslateSql(
+  sqlFilename            = "metastasis_bone_combine.sql",
+  packageName            = "PioneerBPA",
+  dbms                   = attr(connection, "dbms"),
+  cohort_database_schema = cohortDatabaseSchema,
+  cohort_table           = cohortTable,
+  target_table           = target_table,
+  target_metastasis      = target_metastasis,
+  target_bones           = target_bones
+)
+DatabaseConnector::executeSql(connection, sql)
+
+DatabaseConnector::disconnect(connection)
+
+## Combine metastasis + bone + BPA
+connection <- DatabaseConnector::connect(connectionDetails)
+sql <- SqlRender::loadRenderTranslateSql(
+  sqlFilename            = "metastasis_bone_bpa_combine.sql",
+  packageName            = "PioneerBPA",
+  dbms                   = attr(connection, "dbms"),
+  cohort_database_schema = cohortDatabaseSchema,
+  cohort_table           = cohortTable,
+  target_table           = target_table,
+  bpa_za                 = bpa_za,
+  bpa_denosumab          = bpa_denosumab
+)
+DatabaseConnector::executeSql(connection, sql)
+DatabaseConnector::disconnect(connection)
+
+## Combine metastasis + bone + BPA + systemic treatment
+connection <- DatabaseConnector::connect(connectionDetails)
+sql <- SqlRender::loadRenderTranslateSql(
+  sqlFilename            = "Systemic_treatment_join.sql",
+  packageName            = "PioneerBPA",
+  dbms                   = attr(connection, "dbms"),
+  cohort_database_schema = cohortDatabaseSchema,
+  cohort_table           = cohortTable,
+  target_table           = target_table,
+  cohort_adt             = adt,
+  cohort_arpi            = arpi,
+  cohort_chemo           = chemo
+)
+DatabaseConnector::executeSql(connection, sql)
+DatabaseConnector::disconnect(connection)
+
+## Create new cohorts
+
+#Create a new table if not exists
+createCohortTableNew <- function(connection,
+                                 cohortDatabaseSchema,
+                                 cohortTableNew) {
+
+  exists <- DatabaseConnector::existsTable(
+    connection   = connection,
+    databaseSchema = cohortDatabaseSchema,
+    tableName    = cohortTableNew
+  )
+
+  if (exists) {
+    message("Table ", cohortDatabaseSchema, ".", cohortTableNew, " already exists - leaving it in place")
+    return(invisible(FALSE))
+  }
+
+  message("Creating ", cohortDatabaseSchema, ".", cohortTableNew)
+  sql <- "
+    CREATE TABLE @cohort_database_schema.@cohortTableNew (
+      cohort_definition_id INT,
+      subject_id BIGINT,
+      cohort_start_date DATE,
+      cohort_end_date DATE
+    );"
+  sql <- SqlRender::render(sql,
+                           cohort_database_schema = cohortDatabaseSchema,
+                           cohortTableNew         = cohortTableNew)
+  sql <- SqlRender::translate(sql, targetDialect = connection@dbms)
+  DatabaseConnector::executeSql(connection, sql)
+  invisible(TRUE)
+}
+
+
+createDerivedCohorts <- function(connectionDetails = NULL,
+                                 connection = NULL,
+                                 cohortDatabaseSchema,
+                                 targetTable,
+                                 cohortTable,
+                                 cohortTableNew,
+                                 targetMetastasis,
+                                 packageName    = "PioneerBPA",
+                                 createTable    = TRUE,
+                                 deleteExisting = TRUE) {
+
+  sqlFiles <- c("cohort_src",
+                "90100", "90200", "90300",
+                "90210", "90220",
+                "90211", "90212", "90213", "90214",
+                "90221", "90222", "90223", "90224")
+
+  if (is.null(connection)) {
+    connection <- DatabaseConnector::connect(connectionDetails)
+    on.exit(DatabaseConnector::disconnect(connection))
+  }
+
+  # Create the target table if it isn't there yet (never drops an existing one).
+  if (createTable) {
+    createCohortTableNew(connection, cohortDatabaseSchema, cohortTableNew)
+  }
+
+  if (deleteExisting) {
+    cohortIds <- as.integer(setdiff(sqlFiles, "cohort_src"))
+    sql <- SqlRender::render("DELETE FROM @schema.@table WHERE cohort_definition_id IN (@ids);",
+                             schema = cohortDatabaseSchema,
+                             table  = cohortTableNew,
+                             ids    = cohortIds)
+    sql <- SqlRender::translate(sql, targetDialect = connection@dbms)
+    DatabaseConnector::executeSql(connection, sql)
+  }
+
+  for (f in sqlFiles) {
+    message("Running ", f, ".sql")
+    sql <- SqlRender::loadRenderTranslateSql(
+      sqlFilename            = paste0(f, ".sql"),
+      packageName            = packageName,
+      dbms                   = connection@dbms,
+      cohort_database_schema = cohortDatabaseSchema,
+      target_table           = targetTable,
+      cohort_table           = cohortTable,
+      cohortTableNew         = cohortTableNew,
+      target_metastasis      = targetMetastasis
+    )
+    tryCatch(
+      DatabaseConnector::executeSql(connection, sql),
+      error = function(e) stop("Failed on ", f, ".sql: ", conditionMessage(e))
+    )
+  }
+
+  invisible(NULL)
+}
+
+
+createDerivedCohorts(
+  connectionDetails    = connectionDetails,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  targetTable          = target_table,
+  cohortTable          = cohortTable,
+  cohortTableNew       = cohortTableNew,
+  targetMetastasis     = target_metastasis   # your metastasis cohort_definition_id
+)
+
+
+# R/runCohortDiagnostics.R
+
+runDerivedCohortDiagnostics <- function(connectionDetails,
+                                        cdmDatabaseSchema,
+                                        cohortDatabaseSchema,
+                                        cohortTableNew,
+                                        exportFolder,
+                                        databaseId,
+                                        databaseName        = databaseId,
+                                        databaseDescription = databaseId,
+                                        vocabularyDatabaseSchema = cdmDatabaseSchema,
+                                        minCellCount        = 5,
+                                        packageName         = "PioneerBPA") {
+
+  # --- 1. cohort set from the CSV -------------------------------------------
+  csvPath <- system.file("settings", "DerivedCohorts.csv", package = packageName)
+  cohorts <- read.csv(csvPath, stringsAsFactors = FALSE)
+
+  # CohortDiagnostics needs cohortId, cohortName, json, sql.
+  # These cohorts are pre-built in cohortTableNew, so json/sql are placeholders.
+  cohortDefinitionSet <- data.frame(
+    cohortId   = as.double(cohorts$cohortId),
+    cohortName = cohorts$cohortName,
+    json       = "{}",
+    sql        = "SELECT 1;",
+    stringsAsFactors = FALSE
+  )
+
+  # --- 2. custom temporal covariate settings --------------------------------
+  # Time windows (days, relative to cohort start) to characterise over.
+  temporalCovariateSettings <- FeatureExtraction::createTemporalCovariateSettings(
+    useDemographicsGender               = TRUE,
+    useDemographicsAge                  = TRUE,
+    useDemographicsAgeGroup             = TRUE,
+    useDemographicsRace                 = TRUE,
+    useDemographicsEthnicity            = TRUE,
+    useDemographicsIndexYear            = TRUE,
+    useDemographicsIndexMonth           = TRUE,
+    useDemographicsIndexYearMonth       = TRUE,
+    useDemographicsPriorObservationTime = TRUE,
+    useDemographicsPostObservationTime  = TRUE,
+    useDemographicsTimeInCohort         = TRUE,
+    useConditionOccurrence              = TRUE,
+    useProcedureOccurrence              = TRUE,
+    useDrugEraStart                     = TRUE,
+    useMeasurement                      = TRUE,
+    useConditionEraStart                = TRUE,
+    useConditionEraOverlap              = TRUE,
+    useConditionEraGroupStart           = FALSE, # https://github.com/OHDSI/FeatureExtraction/issues/144
+    useConditionEraGroupOverlap         = TRUE,
+    useDrugExposure                     = FALSE, # too many concept IDs
+    useDrugEraOverlap                   = FALSE,
+    useDrugEraGroupStart                = FALSE, # https://github.com/OHDSI/FeatureExtraction/issues/144
+    useDrugEraGroupOverlap              = TRUE,
+    useObservation                      = TRUE,
+    useVisitConceptCount                = TRUE,
+    useVisitCount                       = TRUE,
+    useDeviceExposure                   = TRUE,
+    useCharlsonIndex                    = TRUE,
+    useDcsi                             = TRUE,
+    useChads2                           = TRUE,
+    useChads2Vasc                       = TRUE,
+    useHfrs                             = FALSE,
+    temporalStartDays = c(
+      -9999, # anytime prior
+      -365, # long term prior
+      -180, # medium term prior
+      -30, # short term prior
+      -365, # one year prior to -31
+      -30, # 30 days prior, not including day 0
+      0, # index date only
+      1, # 1 day after to day 30
+      31, # 31 days after to day 365
+      -9999, # any time prior to any time future
+      -30, # 30 days prior to 9999 days after
+      -30, # 30 days prior to 365 days after
+      -30, # 30 days prior to 180 days after
+      -30  # 30 days prior to 30 days after
+    ),
+    temporalEndDays = c(
+      0, # anytime prior
+      0, # long term prior
+      0, # medium term prior
+      0, # short term prior
+      -31, # one year prior to -31
+      -1, # 30 days prior, not including day 0
+      0, # index date only
+      30, # 1 day after to day 30
+      365, # 31 days after to day 365
+      9999, # any time prior to any time future
+      9999, # all after
+      365,
+      180,
+      30
+    )
+  )
+
+  # --- 3. point CohortDiagnostics at the derived cohort table ---------------
+  cohortTableNames <- CohortGenerator::getCohortTableNames(cohortTable = cohortTableNew)
+
+  # --- 4. run ----------------------------------------------------------------
+  CohortDiagnostics::executeDiagnostics(
+    cohortDefinitionSet       = cohortDefinitionSet,
+    exportFolder              = exportFolder,
+    databaseId                = databaseId,
+    databaseName              = databaseName,
+    databaseDescription       = databaseDescription,
+    connectionDetails         = connectionDetails,
+    cdmDatabaseSchema         = cdmDatabaseSchema,
+    cohortDatabaseSchema      = cohortDatabaseSchema,
+    cohortTable               = cohortTableNew,
+    cohortTableNames          = cohortTableNames,
+    vocabularyDatabaseSchema  = vocabularyDatabaseSchema,
+    cdmVersion                = 5,
+    minCellCount              = minCellCount,
+    temporalCovariateSettings = temporalCovariateSettings,
+    # concept-based diagnostics need real cohort JSON -> off for pre-built cohorts
+    runInclusionStatistics        = FALSE,
+    runIncludedSourceConcepts     = FALSE,
+    runOrphanConcepts             = FALSE,
+    runBreakdownIndexEvents       = FALSE,
+    # these run off the generated cohort table -> keep on
+    runVisitContext               = TRUE,
+    runIncidenceRate              = TRUE,
+    runTimeSeries                 = TRUE,
+    runCohortRelationship         = TRUE,
+    runTemporalCohortCharacterization = TRUE
+  )
+}
+
+runDerivedCohortDiagnostics(
+  connectionDetails    = connectionDetails,
+  cdmDatabaseSchema    = cdmDatabaseSchema,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  cohortTableNew       = cohortTableNew,
+  exportFolder         = file.path(outputFolder, "diagnostics"),
+  databaseId           = databaseId
+)
+
+sql <- "SELECT t.bpa_type, COUNT(*)
+FROM marketscan_ccaemdcr_aug2025_results.targetTable t
+GROUP BY t.bpa_type"
+
+sql <- "SELECT t.subject_id
+FROM marketscan_ccaemdcr_aug2025_results.targetTable t
+GROUP BY t.subject_id
+HAVING COUNT(*) = 2
+"
+
+sql <- "SELECT *
+FROM marketscan_ccaemdcr_aug2025_results.targetTable t
+WHERE t.subject_id = 2225848301
+"
+
+sql <- "SELECT *
+FROM marketscan_ccaemdcr_aug2025_results.cohortBPA c
+WHERE c.subject_id = 2225848301
+"
+
+
+
+DatabaseConnector::querySql(connection, sql)
+
+DatabaseConnector::disconnect(connection)
+

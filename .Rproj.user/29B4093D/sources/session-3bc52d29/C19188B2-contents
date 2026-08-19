@@ -1,0 +1,31 @@
+DBMS:
+redshift
+
+Error:
+java.util.NoSuchElementException
+
+SQL:
+CREATE TABLE marketscan_ccaemdcr_aug2025_results.cohortTableNew  (cohort_definition_id INT,
+       subject_id BIGINT,
+      cohort_start_date DATE,
+      cohort_end_date DATE
+    )
+DISTKEY(subject_id)
+
+R version:
+R version 4.3.3 (2024-02-29)
+
+Platform:
+x86_64-pc-linux-gnu
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- PioneerBPA (0.1.0)

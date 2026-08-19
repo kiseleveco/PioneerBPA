@@ -1,0 +1,26 @@
+{
+    "id": "76903A4E",
+    "path": "~/PioneerBPA/inst/settings/DerivedCohorts.csv",
+    "project_path": "inst/settings/DerivedCohorts.csv",
+    "type": "text",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1787052579120.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "6,93",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1787052588,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1787052588740,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,724 @@
+{
+	"cdmVersionRange" : ">=5.0.0",
+	"PrimaryCriteria" : {
+		"CriteriaList" : [
+			{
+				"ConditionOccurrence" : {
+					"CodesetId" : 10,
+					"ConditionTypeExclude" : false
+				}
+			},
+			{
+				"ProcedureOccurrence" : {
+					"CodesetId" : 10,
+					"ProcedureTypeExclude" : false
+				}
+			},
+			{
+				"Observation" : {
+					"CodesetId" : 10,
+					"ObservationTypeExclude" : false
+				}
+			},
+			{
+				"Measurement" : {
+					"CodesetId" : 10,
+					"MeasurementTypeExclude" : false
+				}
+			}
+		],
+		"ObservationWindow" : {
+			"PriorDays" : 0,
+			"PostDays" : 0
+		},
+		"PrimaryCriteriaLimit" : {
+			"Type" : "First"
+		}
+	},
+	"ConceptSets" : [
+		{
+			"id" : 10,
+			"name" : "[CDS 749] NARROW_Any indicator of metastatic disease_to BONE_Cond, Meas_wip",
+			"expression" : {
+				"items" : [
+					{
+						"concept" : {
+							"CONCEPT_ID" : 4183479,
+							"CONCEPT_NAME" : "M1b: Bone(s)",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "370043003",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 4246450,
+							"CONCEPT_NAME" : "Secondary malignant neoplasm of bone marrow",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "94217008",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 78097,
+							"CONCEPT_NAME" : "Secondary malignant neoplasm of bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "94222008",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226073,
+							"CONCEPT_NAME" : "Metastasis to the Bone And Bone Marrow",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031537",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 3181145,
+							"CONCEPT_NAME" : "Sinus cancer with intracranial extension",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "18320001000004108",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "Nebraska Lexicon",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 4312667,
+							"CONCEPT_NAME" : "Thyroid cancer metastatic to bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "424887002",
+							"DOMAIN_ID" : "Condition",
+							"VOCABULARY_ID" : "SNOMED",
+							"CONCEPT_CLASS_ID" : "Clinical Finding"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 36769301,
+							"CONCEPT_NAME" : "Metastasis to the Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP4998978",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226074,
+							"CONCEPT_NAME" : "Metastasis to the Bone Marrow",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031538",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : true,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226075,
+							"CONCEPT_NAME" : "Metastasis to the Bone of Face",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031539",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226076,
+							"CONCEPT_NAME" : "Metastasis to the Bone of Lower Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031540",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226077,
+							"CONCEPT_NAME" : "Metastasis to the Bone of Skull",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031541",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226079,
+							"CONCEPT_NAME" : "Metastasis to the Bone of Upper Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031542",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226094,
+							"CONCEPT_NAME" : "Metastasis to the Carpal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031560",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226137,
+							"CONCEPT_NAME" : "Metastasis to the Ethmoid Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031608",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226146,
+							"CONCEPT_NAME" : "Metastasis to the First Cuneiform Bone of Foot",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031621",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225770,
+							"CONCEPT_NAME" : "Metastasis to the Frontal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031626",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226162,
+							"CONCEPT_NAME" : "Metastasis to the Hamate Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031641",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225638,
+							"CONCEPT_NAME" : "Metastasis to the Long Bone of Lower Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031702",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225639,
+							"CONCEPT_NAME" : "Metastasis to the Long Bone of Upper Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031703",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225648,
+							"CONCEPT_NAME" : "Metastasis to the Lunate Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031712",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225554,
+							"CONCEPT_NAME" : "Metastasis to the Metacarpal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031726",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226078,
+							"CONCEPT_NAME" : "Metastasis to the Metatarsal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031727",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226205,
+							"CONCEPT_NAME" : "Metastasis to the Nasal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031750",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226210,
+							"CONCEPT_NAME" : "Metastasis to the Navicular Bone of Foot",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031755",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226214,
+							"CONCEPT_NAME" : "Metastasis to the Occipital Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031761",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226232,
+							"CONCEPT_NAME" : "Metastasis to the Palatine Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031779",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226238,
+							"CONCEPT_NAME" : "Metastasis to the Parietal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031787",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226244,
+							"CONCEPT_NAME" : "Metastasis to the Pelvic Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031793",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226255,
+							"CONCEPT_NAME" : "Metastasis to the Pisiform Bone of Hand",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031807",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225661,
+							"CONCEPT_NAME" : "Metastasis to the Scaphoid Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031853",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225666,
+							"CONCEPT_NAME" : "Metastasis to the Second Cuneiform Bone of Foot",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031858",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225669,
+							"CONCEPT_NAME" : "Metastasis to the Short Bone of Lower Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031861",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225670,
+							"CONCEPT_NAME" : "Metastasis to the Short Bone of Upper Limb",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031862",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225742,
+							"CONCEPT_NAME" : "Metastasis to the Sphenoid Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031934",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225757,
+							"CONCEPT_NAME" : "Metastasis to the Tarsal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031949",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225758,
+							"CONCEPT_NAME" : "Metastasis to the Temporal Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031950",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35225762,
+							"CONCEPT_NAME" : "Metastasis to the Third Cuneiform Bone of Foot",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031954",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226302,
+							"CONCEPT_NAME" : "Metastasis to the Trapezoid Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5031969",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					},
+					{
+						"concept" : {
+							"CONCEPT_ID" : 35226320,
+							"CONCEPT_NAME" : "Metastasis to the Zygomatic Bone",
+							"STANDARD_CONCEPT" : "S",
+							"STANDARD_CONCEPT_CAPTION" : "Standard",
+							"INVALID_REASON" : "V",
+							"INVALID_REASON_CAPTION" : "Valid",
+							"CONCEPT_CODE" : "OMOP5032012",
+							"DOMAIN_ID" : "Measurement",
+							"VOCABULARY_ID" : "Cancer Modifier",
+							"CONCEPT_CLASS_ID" : "Metastasis"
+						},
+						"isExcluded" : false,
+						"includeDescendants" : true,
+						"includeMapped" : false
+					}
+				]
+			}
+		}
+	],
+	"QualifiedLimit" : {
+		"Type" : "First"
+	},
+	"ExpressionLimit" : {
+		"Type" : "First"
+	},
+	"InclusionRules" : [],
+	"CensoringCriteria" : [],
+	"CollapseSettings" : {
+		"CollapseType" : "ERA",
+		"EraPad" : 0
+	},
+	"CensorWindow" : {}
+}
