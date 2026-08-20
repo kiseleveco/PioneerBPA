@@ -2,15 +2,24 @@ DBMS:
 redshift
 
 Error:
-java.util.NoSuchElementException
+java.lang.NullPointerException: fields must be non-null
 
 SQL:
-CREATE TABLE marketscan_ccaemdcr_aug2025_results.cohortTableNew  (cohort_definition_id INT,
-       subject_id BIGINT,
-      cohort_start_date DATE,
-      cohort_end_date DATE
-    )
-DISTKEY(subject_id)
+  WITH ranked_times AS (
+      SELECT
+          cohort_definition_id,
+          checksum,
+          start_time,
+          end_time,
+          ROW_NUMBER() OVER (PARTITION BY cohort_definition_id  ORDER BY end_time  DESC ) AS rank
+      FROM
+          marketscan_ccaemdcr_aug2025_results.cohortBPA_checksum
+     WHERE end_time IS NOT NULL
+  )
+  SELECT cohort_definition_id, checksum, start_time, end_time
+  FROM ranked_times
+  WHERE rank = 1;
+  
 
 R version:
 R version 4.3.3 (2024-02-29)

@@ -72,7 +72,7 @@ chemo             <- 1774
 # 4. Run options
 # ------------------------------------------------------------------------------
 includeCohortStats <- FALSE
-incrementalCohorts <- TRUE
+incrementalCohorts <- FALSE
 
 # ------------------------------------------------------------------------------
 # 5. Execute the study
