@@ -161,7 +161,7 @@ execute <- function(connectionDetails,
   # --------------------------------------------------------------------------
   if (runDiagnostics) {
     ParallelLogger::logInfo("Running derived cohort diagnostics")
-    runDerivedCohortDiagnostics(
+    PioneerBPA::runDerivedCohortDiagnostics(
       connectionDetails    = connectionDetails,
       cdmDatabaseSchema    = cdmDatabaseSchema,
       cohortDatabaseSchema = cohortDatabaseSchema,
@@ -181,16 +181,24 @@ execute <- function(connectionDetails,
   # --------------------------------------------------------------------------
 
   if (runIRandTTEAnalysis){
-    runIRandTTEAnalysis(connectionDetails        = connectionDetails,
-                        cdmDatabaseSchema        = cdmDatabaseSchema,
-                        cohortDatabaseSchema     = cohortDatabaseSchema,
-                        cohortTable              = cohortTable,
-                        databaseId               = databaseId,
-                        targetCohortIds = NULL,
-                        outcomeCohortIds = NULL,
-                        minCellCount = minCellCount,
-                        outputFolder = outputFolder
-    )}
+    PioneerBPA::appendDerivedCohortsToBase(connectionDetails      = connectionDetails,
+                                            cdmDatabaseSchema     = cdmDatabaseSchema,
+                                            cohortDatabaseSchema  = cohortDatabaseSchema,
+                                            cohortTable           = cohortTable,
+                                            cohortTableNew        = cohortTableNew,
+                                            packageName           = packageName)
+
+    PioneerBPA::runIRandTTEAnalysis(connectionDetails        = connectionDetails,
+                                    cdmDatabaseSchema        = cdmDatabaseSchema,
+                                    cohortDatabaseSchema     = cohortDatabaseSchema,
+                                    cohortTable              = cohortTable,
+                                    databaseId               = databaseId,
+                                    targetCohortIds          = NULL,
+                                    outcomeCohortIds         = NULL,
+                                    minCellCount             = minCellCount,
+                                    outputFolder             = outputFolder
+    )
+    }
 
   invisible(NULL)
 }

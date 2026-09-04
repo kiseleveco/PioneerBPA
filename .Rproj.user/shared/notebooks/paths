@@ -1,6 +1,6 @@
 /home/a_kiselev/PioneerBPA/DESCRIPTION="7FF3A097"
 /home/a_kiselev/PioneerBPA/errorReportSql.txt="7EA3B31D"
-/home/a_kiselev/PioneerBPA/extras/UntitledR.R="D973B44A"
+/home/a_kiselev/PioneerBPA/extras/runDrugExposureDiagnostics.R="383A1698"
 /home/a_kiselev/PioneerBPA/inst/settings/CohortsToCreate.csv="9ADF6FB2"
 /home/a_kiselev/PioneerBPA/inst/settings/Cohorts_description.txt="AD37A888"
 /home/a_kiselev/PioneerBPA/inst/settings/DerivedCohorts.csv="026A7402"
@@ -25,3 +25,4 @@
 /home/a_kiselev/PioneerBPA/renv.lock="ECCAF114"
 /home/a_kiselev/output/MarketScan_BPA/CohortCounts.csv="91F065CE"
 /home/a_kiselev/output/MarketScan_BPA/diagnostics/cohort_count.csv="4BF9604B"
+/home/a_kiselev/output/MarketScan_BPA/drugExposureDiagnostics/temporal_covariate_value.csv="DC4575C3"

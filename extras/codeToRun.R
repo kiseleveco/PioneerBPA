@@ -72,10 +72,10 @@ chemo             <- 1774
 # 4. Run options
 # ------------------------------------------------------------------------------
 includeCohortStats <- FALSE
-incrementalCohorts <- FALSE
-generateCohorts <- TRUE
-createTargetTable <- TRUE
-createDerivedCohorts <- TRUE
+incrementalCohorts <- TRUE
+generateCohorts <- FALSE
+createTargetTable <- FALSE
+createDerivedCohorts <- FALSE
 runDiagnostics <- FALSE
 runIRandTTEAnalysis <- TRUE
 
