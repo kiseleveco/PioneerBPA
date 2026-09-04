@@ -29,7 +29,9 @@ execute(
   generateCohorts = TRUE,
   createTargetTable = TRUE,
   createDerivedCohorts = TRUE,
+  appendTargetsToCohortTable = TRUE,
   runDiagnostics = TRUE,
+  runIRandTTEAnalysis = TRUE,
   packageName = "PioneerBPA"
 )
 }
@@ -85,12 +87,20 @@ execute(
 
 \item{createDerivedCohorts}{Logical. Run the derived cohort step.}
 
+\item{appendTargetsToCohortTable}{Logical. Copy the derived target cohorts into
+the base cohort table (required before \code{runIRandTTEAnalysis}).}
+
 \item{runDiagnostics}{Logical. Run the diagnostics step.}
+
+\item{runIRandTTEAnalysis}{Logical. Run the incidence-rate / time-to-event
+safety analysis step.}
 
 \item{packageName}{Name of this package.}
 }
 \description{
 Runs the full PioneerBPA analysis end to end: cohort generation, target
-table assembly, derived cohort construction, and CohortDiagnostics. Each
-step is individually switchable so a site can (re)run just part of the study.
+table assembly, derived cohort construction, appending the target cohorts
+into the base cohort table, CohortDiagnostics, and the incidence-rate /
+time-to-event safety analysis. Each step is individually switchable so a site
+can (re)run just part of the study.
 }

@@ -73,6 +73,11 @@ chemo             <- 1774
 # ------------------------------------------------------------------------------
 includeCohortStats <- FALSE
 incrementalCohorts <- FALSE
+generateCohorts <- TRUE
+createTargetTable <- TRUE
+createDerivedCohorts <- TRUE
+runDiagnostics <- FALSE
+runIRandTTEAnalysis <- TRUE
 
 # ------------------------------------------------------------------------------
 # 5. Execute the study
@@ -98,8 +103,9 @@ PioneerBPA::execute(
   chemo                    = chemo,
   incrementalCohorts       = incrementalCohorts,
   includeCohortStats       = includeCohortStats,
-  generateCohorts          = TRUE,
-  createTargetTable        = TRUE,
-  createDerivedCohorts     = TRUE,
-  runDiagnostics           = TRUE
+  generateCohorts          = generateCohorts,
+  createTargetTable        = createTargetTable,
+  createDerivedCohorts     = createDerivedCohorts,
+  runDiagnostics           = runDiagnostics,
+  runIRandTTEAnalysis      = runIRandTTEAnalysis
 )

@@ -6,3 +6,11 @@ cohort_name,cohortId,atlasId
 [RQ2_BPA] ADT,1772,1772
 [RQ2_BPA] Chemo,1774,1774
 [RQ2_BPA] ARPI,1773,1773
+[RQ2_BPA] Hospitalization,1813,1813
+[RQ2_BPA] Acute Kidney Injury,1812,1812
+[RQ2_BPA] Cardiovascular disease,1810,1810
+[RQ2_BPA] Osteoporosis,1779,1779
+[RQ2_BPA] Chronic Kidney Disease,1778,1778
+[RQ2_BPA] Hypercalcemia,1777,1777
+[RQ2_BPA] Spinal cord compression,1776,1776
+[RQ2_BPA] Bone fracture,1775,1775

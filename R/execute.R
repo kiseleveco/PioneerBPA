@@ -95,7 +95,8 @@ execute <- function(connectionDetails,
                     createTargetTable      = TRUE,
                     createDerivedCohorts   = TRUE,
                     runDiagnostics         = TRUE,
-                    packageName            = "PioneerBPA") {
+                    packageName            = "PioneerBPA",
+                    runIRandTTEAnalysis    = TRUE) {
 
   if (!dir.exists(outputFolder)) {
     dir.create(outputFolder, recursive = TRUE)
@@ -174,6 +175,22 @@ execute <- function(connectionDetails,
       packageName          = packageName
     )
   }
+
+  # --------------------------------------------------------------------------
+  # 5. Run IR and TTE analysis
+  # --------------------------------------------------------------------------
+
+  if (runIRandTTEAnalysis){
+    runIRandTTEAnalysis(connectionDetails        = connectionDetails,
+                        cdmDatabaseSchema        = cdmDatabaseSchema,
+                        cohortDatabaseSchema     = cohortDatabaseSchema,
+                        cohortTable              = cohortTable,
+                        databaseId               = databaseId,
+                        targetCohortIds = NULL,
+                        outcomeCohortIds = NULL,
+                        minCellCount = minCellCount,
+                        outputFolder = outputFolder
+    )}
 
   invisible(NULL)
 }

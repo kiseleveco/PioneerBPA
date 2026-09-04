@@ -1,0 +1,105 @@
+target_id,target_name,outcome_id,outcome_name,episodic,chronic
+90100,Bone metastasis index,1813,[RQ2_BPA] Hospitalization,1,0
+90100,Bone metastasis index,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90100,Bone metastasis index,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90100,Bone metastasis index,1779,[RQ2_BPA] Osteoporosis,0,1
+90100,Bone metastasis index,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90100,Bone metastasis index,1777,[RQ2_BPA] Hypercalcemia,0,1
+90100,Bone metastasis index,1776,[RQ2_BPA] Spinal cord compression,1,0
+90100,Bone metastasis index,1775,[RQ2_BPA] Bone fracture,1,0
+90200,Any bone-targeting agent (BPA),1813,[RQ2_BPA] Hospitalization,1,0
+90200,Any bone-targeting agent (BPA),1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90200,Any bone-targeting agent (BPA),1810,[RQ2_BPA] Cardiovascular disease,1,0
+90200,Any bone-targeting agent (BPA),1779,[RQ2_BPA] Osteoporosis,0,1
+90200,Any bone-targeting agent (BPA),1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90200,Any bone-targeting agent (BPA),1777,[RQ2_BPA] Hypercalcemia,0,1
+90200,Any bone-targeting agent (BPA),1776,[RQ2_BPA] Spinal cord compression,1,0
+90200,Any bone-targeting agent (BPA),1775,[RQ2_BPA] Bone fracture,1,0
+90300,No bone-targeting agent (BPA),1813,[RQ2_BPA] Hospitalization,1,0
+90300,No bone-targeting agent (BPA),1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90300,No bone-targeting agent (BPA),1810,[RQ2_BPA] Cardiovascular disease,1,0
+90300,No bone-targeting agent (BPA),1779,[RQ2_BPA] Osteoporosis,0,1
+90300,No bone-targeting agent (BPA),1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90300,No bone-targeting agent (BPA),1777,[RQ2_BPA] Hypercalcemia,0,1
+90300,No bone-targeting agent (BPA),1776,[RQ2_BPA] Spinal cord compression,1,0
+90300,No bone-targeting agent (BPA),1775,[RQ2_BPA] Bone fracture,1,0
+90210,BPA: Denosumab,1813,[RQ2_BPA] Hospitalization,1,0
+90210,BPA: Denosumab,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90210,BPA: Denosumab,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90210,BPA: Denosumab,1779,[RQ2_BPA] Osteoporosis,0,1
+90210,BPA: Denosumab,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90210,BPA: Denosumab,1777,[RQ2_BPA] Hypercalcemia,0,1
+90210,BPA: Denosumab,1776,[RQ2_BPA] Spinal cord compression,1,0
+90210,BPA: Denosumab,1775,[RQ2_BPA] Bone fracture,1,0
+90220,BPA: Zoledronic acid (ZA),1813,[RQ2_BPA] Hospitalization,1,0
+90220,BPA: Zoledronic acid (ZA),1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90220,BPA: Zoledronic acid (ZA),1810,[RQ2_BPA] Cardiovascular disease,1,0
+90220,BPA: Zoledronic acid (ZA),1779,[RQ2_BPA] Osteoporosis,0,1
+90220,BPA: Zoledronic acid (ZA),1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90220,BPA: Zoledronic acid (ZA),1777,[RQ2_BPA] Hypercalcemia,0,1
+90220,BPA: Zoledronic acid (ZA),1776,[RQ2_BPA] Spinal cord compression,1,0
+90220,BPA: Zoledronic acid (ZA),1775,[RQ2_BPA] Bone fracture,1,0
+90211,Denosumab + ADT only,1813,[RQ2_BPA] Hospitalization,1,0
+90211,Denosumab + ADT only,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90211,Denosumab + ADT only,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90211,Denosumab + ADT only,1779,[RQ2_BPA] Osteoporosis,0,1
+90211,Denosumab + ADT only,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90211,Denosumab + ADT only,1777,[RQ2_BPA] Hypercalcemia,0,1
+90211,Denosumab + ADT only,1776,[RQ2_BPA] Spinal cord compression,1,0
+90211,Denosumab + ADT only,1775,[RQ2_BPA] Bone fracture,1,0
+90212,Denosumab + ADT + ARPI,1813,[RQ2_BPA] Hospitalization,1,0
+90212,Denosumab + ADT + ARPI,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90212,Denosumab + ADT + ARPI,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90212,Denosumab + ADT + ARPI,1779,[RQ2_BPA] Osteoporosis,0,1
+90212,Denosumab + ADT + ARPI,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90212,Denosumab + ADT + ARPI,1777,[RQ2_BPA] Hypercalcemia,0,1
+90212,Denosumab + ADT + ARPI,1776,[RQ2_BPA] Spinal cord compression,1,0
+90212,Denosumab + ADT + ARPI,1775,[RQ2_BPA] Bone fracture,1,0
+90213,Denosumab + ADT + chemotherapy,1813,[RQ2_BPA] Hospitalization,1,0
+90213,Denosumab + ADT + chemotherapy,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90213,Denosumab + ADT + chemotherapy,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90213,Denosumab + ADT + chemotherapy,1779,[RQ2_BPA] Osteoporosis,0,1
+90213,Denosumab + ADT + chemotherapy,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90213,Denosumab + ADT + chemotherapy,1777,[RQ2_BPA] Hypercalcemia,0,1
+90213,Denosumab + ADT + chemotherapy,1776,[RQ2_BPA] Spinal cord compression,1,0
+90213,Denosumab + ADT + chemotherapy,1775,[RQ2_BPA] Bone fracture,1,0
+90214,Denosumab + ADT + ARPI + chemotherapy,1813,[RQ2_BPA] Hospitalization,1,0
+90214,Denosumab + ADT + ARPI + chemotherapy,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90214,Denosumab + ADT + ARPI + chemotherapy,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90214,Denosumab + ADT + ARPI + chemotherapy,1779,[RQ2_BPA] Osteoporosis,0,1
+90214,Denosumab + ADT + ARPI + chemotherapy,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90214,Denosumab + ADT + ARPI + chemotherapy,1777,[RQ2_BPA] Hypercalcemia,0,1
+90214,Denosumab + ADT + ARPI + chemotherapy,1776,[RQ2_BPA] Spinal cord compression,1,0
+90214,Denosumab + ADT + ARPI + chemotherapy,1775,[RQ2_BPA] Bone fracture,1,0
+90221,ZA + ADT only,1813,[RQ2_BPA] Hospitalization,1,0
+90221,ZA + ADT only,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90221,ZA + ADT only,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90221,ZA + ADT only,1779,[RQ2_BPA] Osteoporosis,0,1
+90221,ZA + ADT only,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90221,ZA + ADT only,1777,[RQ2_BPA] Hypercalcemia,0,1
+90221,ZA + ADT only,1776,[RQ2_BPA] Spinal cord compression,1,0
+90221,ZA + ADT only,1775,[RQ2_BPA] Bone fracture,1,0
+90222,ZA + ADT + ARPI,1813,[RQ2_BPA] Hospitalization,1,0
+90222,ZA + ADT + ARPI,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90222,ZA + ADT + ARPI,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90222,ZA + ADT + ARPI,1779,[RQ2_BPA] Osteoporosis,0,1
+90222,ZA + ADT + ARPI,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90222,ZA + ADT + ARPI,1777,[RQ2_BPA] Hypercalcemia,0,1
+90222,ZA + ADT + ARPI,1776,[RQ2_BPA] Spinal cord compression,1,0
+90222,ZA + ADT + ARPI,1775,[RQ2_BPA] Bone fracture,1,0
+90223,ZA + ADT + chemotherapy,1813,[RQ2_BPA] Hospitalization,1,0
+90223,ZA + ADT + chemotherapy,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90223,ZA + ADT + chemotherapy,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90223,ZA + ADT + chemotherapy,1779,[RQ2_BPA] Osteoporosis,0,1
+90223,ZA + ADT + chemotherapy,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90223,ZA + ADT + chemotherapy,1777,[RQ2_BPA] Hypercalcemia,0,1
+90223,ZA + ADT + chemotherapy,1776,[RQ2_BPA] Spinal cord compression,1,0
+90223,ZA + ADT + chemotherapy,1775,[RQ2_BPA] Bone fracture,1,0
+90224,ZA + ADT + ARPI + chemotherapy,1813,[RQ2_BPA] Hospitalization,1,0
+90224,ZA + ADT + ARPI + chemotherapy,1812,[RQ2_BPA] Acute Kidney Injury,1,0
+90224,ZA + ADT + ARPI + chemotherapy,1810,[RQ2_BPA] Cardiovascular disease,1,0
+90224,ZA + ADT + ARPI + chemotherapy,1779,[RQ2_BPA] Osteoporosis,0,1
+90224,ZA + ADT + ARPI + chemotherapy,1778,[RQ2_BPA] Chronic Kidney Disease,0,1
+90224,ZA + ADT + ARPI + chemotherapy,1777,[RQ2_BPA] Hypercalcemia,0,1
+90224,ZA + ADT + ARPI + chemotherapy,1776,[RQ2_BPA] Spinal cord compression,1,0
+90224,ZA + ADT + ARPI + chemotherapy,1775,[RQ2_BPA] Bone fracture,1,0
