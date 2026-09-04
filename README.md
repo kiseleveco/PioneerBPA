@@ -5,8 +5,6 @@ Real-world utilization of Bone Protective Agents in metastatic prostate cancer
 - **Analytics use case(s):** Characterization
 - **Study type:** Clinical Application
 - **Tags:** Prostate cancer, Bone metastases, Bone protective agents
-- **Study lead:** Andrei Kiselev
-- **Study lead contact:** andrei.kiselev@bdmconsulting.fr
 - **Data model:** OMOP CDM v5.x
 - **Study package status:** In development
 
