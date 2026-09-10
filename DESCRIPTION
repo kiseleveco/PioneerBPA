@@ -24,6 +24,7 @@ Imports:
     CohortDiagnostics (>= 3.2.0),
     CohortMethod (>= 5.2.0),
     Cyclops (>= 3.4.0),
+    Andromeda (>= 0.6.0),
     dplyr (>= 1.1.0),
     readr (>= 2.1.0),
     survival (>= 3.5.0),

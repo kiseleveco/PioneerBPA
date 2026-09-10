@@ -29,10 +29,16 @@ execute(
   generateCohorts = TRUE,
   createTargetTable = TRUE,
   createDerivedCohorts = TRUE,
-  appendTargetsToCohortTable = TRUE,
   runDiagnostics = TRUE,
+  packageName = "PioneerBPA",
   runIRandTTEAnalysis = TRUE,
-  packageName = "PioneerBPA"
+  runComparativeEffectiveness = TRUE,
+  psMethod = c("matching", "weighting"),
+  excludedCovariateConceptIds = c(),
+  cmRiskWindowStart = 1,
+  cmRiskWindowEnd = 1095,
+  cmMinCohortSize = 100,
+  cmMinOutcomeEvents = 10
 )
 }
 \arguments{
@@ -87,20 +93,37 @@ execute(
 
 \item{createDerivedCohorts}{Logical. Run the derived cohort step.}
 
-\item{appendTargetsToCohortTable}{Logical. Copy the derived target cohorts into
-the base cohort table (required before \code{runIRandTTEAnalysis}).}
-
 \item{runDiagnostics}{Logical. Run the diagnostics step.}
 
-\item{runIRandTTEAnalysis}{Logical. Run the incidence-rate / time-to-event
-safety analysis step.}
-
 \item{packageName}{Name of this package.}
+
+\item{runIRandTTEAnalysis}{Logical. Run the incidence-rate / time-to-event
+safety analysis step (appends the target cohorts into the base cohort table
+first).}
+
+\item{runComparativeEffectiveness}{Logical. Run the comparative-effectiveness
+(CohortMethod) step.}
+
+\item{psMethod}{Propensity-score adjustment for the comparative-effectiveness
+step: \code{"matching"} (default) or \code{"weighting"}.}
+
+\item{excludedCovariateConceptIds}{Concept ids of the denosumab and zoledronic
+acid ingredients (and descendants) to exclude from the propensity-model
+covariates.}
+
+\item{cmRiskWindowStart, cmRiskWindowEnd}{Time-at-risk window (days) for the
+comparative-effectiveness Cox models. Defaults \code{1} and \code{1095}.}
+
+\item{cmMinCohortSize}{Minimum subjects per arm for the comparative analysis.
+Default 100.}
+
+\item{cmMinOutcomeEvents}{Minimum events per arm to fit a Cox model. Default
+10.}
 }
 \description{
 Runs the full PioneerBPA analysis end to end: cohort generation, target
-table assembly, derived cohort construction, appending the target cohorts
-into the base cohort table, CohortDiagnostics, and the incidence-rate /
-time-to-event safety analysis. Each step is individually switchable so a site
-can (re)run just part of the study.
+table assembly, derived cohort construction, CohortDiagnostics, the
+incidence-rate / time-to-event safety analysis, and the comparative-
+effectiveness (denosumab vs zoledronic acid) CohortMethod analysis. Each step
+is individually switchable so a site can (re)run just part of the study.
 }
