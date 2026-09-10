@@ -78,6 +78,16 @@ createTargetTable <- TRUE
 createDerivedCohorts <- TRUE
 runDiagnostics <- FALSE
 runIRandTTEAnalysis <- TRUE
+runComparativeEffectiveness <- TRUE
+
+## Comparative effectiveness (denosumab vs ZA) options
+## RxNorm INGREDIENT concept ids for denosumab and zoledronic acid (and their
+## descendants are excluded automatically). These MUST be filled in, otherwise
+## the exposure leaks into the propensity model and invalidates it.
+##   denosumab ingredient concept id  = <fill in>
+##   zoledronic acid ingredient concept id = <fill in>
+excludedDrugConcepts <- c()          # e.g. c(1594045, 1524674)
+psMethod             <- "matching"   # or "weighting" (stabilized IPTW)
 
 # ------------------------------------------------------------------------------
 # 5. Execute the study
@@ -107,5 +117,8 @@ PioneerBPA::execute(
   createTargetTable        = createTargetTable,
   createDerivedCohorts     = createDerivedCohorts,
   runDiagnostics           = runDiagnostics,
-  runIRandTTEAnalysis      = runIRandTTEAnalysis
+  runIRandTTEAnalysis      = runIRandTTEAnalysis,
+  runComparativeEffectiveness = runComparativeEffectiveness,
+  psMethod                    = psMethod,
+  excludedCovariateConceptIds = excludedDrugConcepts
 )

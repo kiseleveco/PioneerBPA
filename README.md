@@ -103,12 +103,15 @@ PioneerBPA::execute(
 )
 ```
 
-`execute()` runs four steps, each individually switchable via its
+`execute()` runs the study steps, each individually switchable via its
 `generateCohorts` / `createTargetTable` / `createDerivedCohorts` /
-`runDiagnostics` arguments so a site can re-run just part of the study.
+`runDiagnostics` / `runIRandTTEAnalysis` / `runComparativeEffectiveness`
+arguments so a site can re-run just part of the study.
 
-Results are written under `outputFolder` (cohort counts, optional cohort
-statistics, and a `diagnostics/` folder produced by CohortDiagnostics).
+Results are written under `outputFolder`: cohort counts and optional cohort
+statistics; a `diagnostics/` folder (CohortDiagnostics); an `IRandTTEAnalysis/`
+folder (incidence rates + Kaplan-Meier); and a `comparativeEffectiveness/`
+folder (propensity plot, comparability decision, covariate balance, Cox HRs).
 
 ## Package structure
 
@@ -117,12 +120,15 @@ documentation.
 
 | File | Function | Role |
 |------|----------|------|
-| `R/execute.R` | `execute()` | **Main entry point** — orchestrates the four steps below. |
+| `R/execute.R` | `execute()` | **Main entry point** — orchestrates the steps below. |
 | `R/generateStudyCohorts.R` | `generateStudyCohorts()` | Instantiates the base study cohorts on the CDM. |
 | `R/createTargetTable.R` | `createTargetTable()` | Combines metastasis + bone + BPA + systemic-treatment cohorts into the target table. |
 | `R/createDerivedCohorts.R` | `createDerivedCohorts()` | Builds the derived treatment-combination cohorts. |
 | `R/createCohortTableNew.R` | `createCohortTableNew()` | Creates (drop-and-recreate) the derived cohort table. |
+| `R/appendDerivedCohorts.R` | `appendDerivedCohortsToBase()` | Copies the derived target cohorts into the base cohort table (end-of-observation end date) so targets and outcomes share one table. |
 | `R/runDerivedCohortDiagnostics.R` | `runDerivedCohortDiagnostics()` | Runs CohortDiagnostics on the derived cohorts. |
+| `R/runIRandTTE.R` | `runIRandTTEAnalysis()` | Incidence rates (Poisson CI) and Kaplan-Meier time-to-event for the safety outcomes. |
+| `R/runCohortMethodAnalysis.R` | `runCohortMethodAnalysis()` | Comparative effectiveness (denosumab vs ZA): LASSO propensity scores, matching/weighting, Cox models. |
 
 Supporting resources under `inst/`:
 
@@ -151,6 +157,31 @@ index (90100), the BPA (90200) and no-BPA (90300) populations, the
 denosumab (90210) and ZA (90220) first-agent splits, and their ADT / ARPI /
 chemotherapy combinations (90211–90214, 90221–90224). See the CSV for the full
 descriptions.
+
+## Comparative effectiveness (denosumab vs ZA)
+
+`runCohortMethodAnalysis()` compares the two first-agent arms — denosumab
+(`90210`) vs zoledronic acid (`90220`) — with the OHDSI `CohortMethod`
+framework: LASSO-regularized propensity scores (`Cyclops`), propensity-score
+matching (default) or stabilized IPTW weighting, and Cox proportional-hazards
+models over a 3-year risk window for the outcomes in `IRsettings.csv`.
+
+Before any outcome model is fit it writes a **propensity-score plot** and a
+**comparability decision** (adequate sample size and overlap); if overlap is
+inadequate the outcome models are skipped unless `forceIfNotComparable = TRUE`.
+Redundant / highly correlated covariates, and any propensity-model fitting
+failure, are logged with the exact `excludedCovariateConceptIds` value to set so
+they can be excluded and the analysis re-run.
+
+**Required input:** `excludedCovariateConceptIds` must list the RxNorm
+**ingredient** concept ids for denosumab and zoledronic acid (not the cohort ids
+1770/1771); their descendants are excluded automatically. Leaving it empty logs
+a warning, because the exposure would otherwise leak into the propensity model.
+
+Outputs land in `<outputFolder>/comparativeEffectiveness/`: `ps_90210_vs_90220.png`,
+`psModelMetrics.csv`, `comparabilityDecision.csv`, `covariateBalance*.{csv,png}`,
+`correlatedCovariates.csv` (if any), and `outcomeModelResults.csv` (hazard
+ratios with 95% CIs).
 
 ## Refreshing cohort definitions from Atlas
 
