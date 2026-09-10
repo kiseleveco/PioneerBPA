@@ -2,12 +2,18 @@ DBMS:
 redshift
 
 Error:
-com.amazon.redshift.util.RedshiftException: ERROR: operator does not exist: bigint == integer
-  Hint: No operator matches the given name and argument type(s). You may need to add explicit type casts.
+com.amazon.redshift.util.RedshiftException: ERROR: aggregates not allowed in GROUP BY clause
 
 SQL:
-SELECT * FROM marketscan_ccaemdcr_aug2025_results.cohortBPA
-                            WHERE cohort_definition_id == 90100
+SELECT DATE_PART(year, MIN(observation_period_start_date)) AS first_start_year,
+       COUNT(*) AS num_patients
+FROM (
+    SELECT person_id, MIN(observation_period_start_date) AS observation_period_start_date
+    FROM marketscan_ccaemdcr_aug2025.observation_period
+    GROUP BY person_id
+) t
+GROUP BY 1
+ORDER BY 1;
 
 R version:
 R version 4.3.3 (2024-02-29)
@@ -19,11 +25,10 @@ Attached base packages:
 - stats
 - graphics
 - grDevices
-- datasets
 - utils
+- datasets
 - methods
 - base
 
 Other attached packages:
-- ROhdsiWebApi (1.3.3)
 - PioneerBPA (0.1.0)

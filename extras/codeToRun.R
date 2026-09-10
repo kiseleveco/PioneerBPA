@@ -41,16 +41,16 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 # ------------------------------------------------------------------------------
 # 2. Schema and table names
 # ------------------------------------------------------------------------------
-cdmDatabaseSchema        <- "marketscan_ccaemdcr_aug2025"         # read-only CDM
+cdmDatabaseSchema        <- "marketscan_ccaemdcr_prod_sep2026"         # read-only CDM
 vocabularyDatabaseSchema <- cdmDatabaseSchema                     # usually same as CDM
-cohortDatabaseSchema     <- "marketscan_ccaemdcr_aug2025_results" # write-enabled; needs read/write/delete
+cohortDatabaseSchema     <- "marketscan_ccaemdcr_prod_sep2026_results" # write-enabled; needs read/write/delete
 cohortTable              <- "cohortBPA"
 cohortTableNew           <- "cohortTableNew"
 targetTable              <- "targetTable"
 
-databaseId          <- "MarketScan"           # short identifier, no spaces
-databaseName        <- "MarketScan aug2025"
-databaseDescription <- "MarketScan aug2025"
+databaseId          <- "MarketScan2026"           # short identifier, no spaces
+databaseName        <- "MarketScan sep2026"
+databaseDescription <- "MarketScan sep2026"
 
 outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA"))
 
@@ -71,12 +71,12 @@ chemo             <- 1774
 # ------------------------------------------------------------------------------
 # 4. Run options
 # ------------------------------------------------------------------------------
-includeCohortStats <- FALSE
+includeCohortStats <- TRUE
 incrementalCohorts <- TRUE
-generateCohorts <- FALSE
-createTargetTable <- FALSE
-createDerivedCohorts <- FALSE
-runDiagnostics <- FALSE
+generateCohorts <- TRUE
+createTargetTable <- TRUE
+createDerivedCohorts <- TRUE
+runDiagnostics <- TRUE
 runIRandTTEAnalysis <- TRUE
 
 # ------------------------------------------------------------------------------
