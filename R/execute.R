@@ -191,7 +191,7 @@ execute <- function(connectionDetails,
   # --------------------------------------------------------------------------
   if (runDiagnostics) {
     ParallelLogger::logInfo("Running derived cohort diagnostics")
-    runDerivedCohortDiagnostics(
+    PioneerBPA::runDerivedCohortDiagnostics(
       connectionDetails    = connectionDetails,
       cdmDatabaseSchema    = cdmDatabaseSchema,
       cohortDatabaseSchema = cohortDatabaseSchema,
@@ -211,23 +211,24 @@ execute <- function(connectionDetails,
   # --------------------------------------------------------------------------
 
   if (runIRandTTEAnalysis){
-    appendDerivedCohortsToBase (connectionDetails     = connectionDetails,
-                                cdmDatabaseSchema     = cdmDatabaseSchema,
-                                cohortDatabaseSchema  = cohortDatabaseSchema,
-                                cohortTable           = cohortTable,
-                                cohortTableNew        = cohortTableNew,
-                                packageName           = packageName)
+    PioneerBPA::appendDerivedCohortsToBase(connectionDetails      = connectionDetails,
+                                            cdmDatabaseSchema     = cdmDatabaseSchema,
+                                            cohortDatabaseSchema  = cohortDatabaseSchema,
+                                            cohortTable           = cohortTable,
+                                            cohortTableNew        = cohortTableNew,
+                                            packageName           = packageName)
 
-    runIRandTTEAnalysis(connectionDetails        = connectionDetails,
-                        cdmDatabaseSchema        = cdmDatabaseSchema,
-                        cohortDatabaseSchema     = cohortDatabaseSchema,
-                        cohortTable              = cohortTable,
-                        databaseId               = databaseId,
-                        targetCohortIds = NULL,
-                        outcomeCohortIds = NULL,
-                        minCellCount = minCellCount,
-                        outputFolder = outputFolder
-    )}
+    PioneerBPA::runIRandTTEAnalysis(connectionDetails        = connectionDetails,
+                                    cdmDatabaseSchema        = cdmDatabaseSchema,
+                                    cohortDatabaseSchema     = cohortDatabaseSchema,
+                                    cohortTable              = cohortTable,
+                                    databaseId               = databaseId,
+                                    targetCohortIds          = NULL,
+                                    outcomeCohortIds         = NULL,
+                                    minCellCount             = minCellCount,
+                                    outputFolder             = outputFolder
+    )
+    }
 
   # --------------------------------------------------------------------------
   # 6. Comparative effectiveness: denosumab (90210) vs zoledronic acid (90220)
