@@ -28,6 +28,13 @@
 #'     \code{\link{createDerivedCohorts}}.
 #'   \item \strong{runDiagnostics} - characterise the derived cohorts with
 #'     \code{\link{runDerivedCohortDiagnostics}}.
+#'   \item \strong{runIRandTTEAnalysis} - append the target cohorts into the base
+#'     cohort table (\code{\link{appendDerivedCohortsToBase}}) and estimate
+#'     incidence rates and time-to-event for the safety outcomes with
+#'     \code{\link{runIRandTTEAnalysis}}.
+#'   \item \strong{runComparativeEffectiveness} - compare denosumab vs
+#'     zoledronic acid (propensity-score matched/weighted Cox models) with
+#'     \code{\link{runCohortMethodAnalysis}}.
 #' }
 #'
 #' @param connectionDetails        DatabaseConnector connection details object.
@@ -67,6 +74,22 @@
 #' @param createTargetTable        Logical. Run the target table step.
 #' @param createDerivedCohorts     Logical. Run the derived cohort step.
 #' @param runDiagnostics           Logical. Run the diagnostics step.
+#' @param runIRandTTEAnalysis      Logical. Run the incidence-rate /
+#'   time-to-event safety analysis step.
+#' @param runComparativeEffectiveness Logical. Run the comparative-effectiveness
+#'   (CohortMethod) step.
+#' @param psMethod                 Propensity-score adjustment for the
+#'   comparative-effectiveness step: \code{"matching"} (default) or
+#'   \code{"weighting"}.
+#' @param excludedCovariateConceptIds Concept ids of the denosumab and zoledronic
+#'   acid ingredients (and descendants) to exclude from the propensity-model
+#'   covariates.
+#' @param cmRiskWindowStart,cmRiskWindowEnd Time-at-risk window (days) for the
+#'   comparative-effectiveness Cox models. Defaults \code{1} and \code{1095}.
+#' @param cmMinCohortSize          Minimum subjects per arm for the comparative
+#'   analysis. Default 100.
+#' @param cmMinOutcomeEvents       Minimum events per arm to fit a Cox model.
+#'   Default 10.
 #' @param packageName              Name of this package.
 #'
 #' @export
@@ -96,7 +119,14 @@ execute <- function(connectionDetails,
                     createDerivedCohorts   = TRUE,
                     runDiagnostics         = TRUE,
                     packageName            = "PioneerBPA",
-                    runIRandTTEAnalysis    = TRUE) {
+                    runIRandTTEAnalysis    = TRUE,
+                    runComparativeEffectiveness = TRUE,
+                    psMethod               = c("matching", "weighting"),
+                    excludedCovariateConceptIds = c(),
+                    cmRiskWindowStart      = 1,
+                    cmRiskWindowEnd        = 1095,
+                    cmMinCohortSize        = 100,
+                    cmMinOutcomeEvents     = 10) {
 
   if (!dir.exists(outputFolder)) {
     dir.create(outputFolder, recursive = TRUE)
@@ -199,6 +229,39 @@ execute <- function(connectionDetails,
                                     outputFolder             = outputFolder
     )
     }
+
+  # --------------------------------------------------------------------------
+  # 6. Comparative effectiveness: denosumab (90210) vs zoledronic acid (90220)
+  #    The two arms must co-reside in cohortTable, so the derived cohorts are
+  #    appended first (idempotent; a no-op change if step 5 already did it).
+  # --------------------------------------------------------------------------
+  if (runComparativeEffectiveness) {
+    ParallelLogger::logInfo("Running comparative effectiveness analysis")
+    PioneerBPA::appendDerivedCohortsToBase(
+      connectionDetails    = connectionDetails,
+      cdmDatabaseSchema    = cdmDatabaseSchema,
+      cohortDatabaseSchema = cohortDatabaseSchema,
+      cohortTable          = cohortTable,
+      cohortTableNew       = cohortTableNew,
+      packageName          = packageName
+    )
+    PioneerBPA::runCohortMethodAnalysis(
+      connectionDetails           = connectionDetails,
+      cdmDatabaseSchema           = cdmDatabaseSchema,
+      cohortDatabaseSchema        = cohortDatabaseSchema,
+      cohortTable                 = cohortTable,
+      excludedCovariateConceptIds = excludedCovariateConceptIds,
+      psMethod                    = psMethod,
+      riskWindowStart             = cmRiskWindowStart,
+      riskWindowEnd               = cmRiskWindowEnd,
+      minCohortSize               = cmMinCohortSize,
+      minOutcomeEvents            = cmMinOutcomeEvents,
+      databaseId                  = databaseId,
+      minCellCount                = minCellCount,
+      outputFolder                = outputFolder,
+      packageName                 = packageName
+    )
+  }
 
   invisible(NULL)
 }
