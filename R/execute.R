@@ -108,6 +108,9 @@ execute <- function(connectionDetails,
                     targetBones,
                     bpaZa,
                     bpaDenosumab,
+                    bpaAa               = NULL,
+                    bpaAll              = NULL,
+                    sensitivity,
                     adt,
                     arpi,
                     chemo,
@@ -163,6 +166,9 @@ execute <- function(connectionDetails,
       targetBones          = targetBones,
       bpaZa                = bpaZa,
       bpaDenosumab         = bpaDenosumab,
+      bpaAa                = bpaAa,
+      bpaAll               = bpaAll,
+      sensitivity          = sensitivity,
       adt                  = adt,
       arpi                 = arpi,
       chemo                = chemo,
@@ -184,6 +190,12 @@ execute <- function(connectionDetails,
       targetMetastasis     = targetMetastasis,
       packageName          = packageName
     )
+    PioneerBPA::appendDerivedCohortsToBase(connectionDetails      = connectionDetails,
+                                           cdmDatabaseSchema     = cdmDatabaseSchema,
+                                           cohortDatabaseSchema  = cohortDatabaseSchema,
+                                           cohortTable           = cohortTable,
+                                           cohortTableNew        = cohortTableNew,
+                                           packageName           = packageName)
   }
 
   # --------------------------------------------------------------------------

@@ -125,12 +125,15 @@
 #' inadequate the decision and plot are still written, but the outcome models are
 #' skipped unless \code{forceIfNotComparable = TRUE}.
 #'
-#' If covariates are redundant or highly correlated - a common cause of unstable
-#' or non-identifiable propensity models - the offending covariates are written
-#' to \code{correlatedCovariates.csv} and logged (with names, ids, and the exact
-#' \code{excludedCovariateConceptIds} value to set), so the user can exclude them
-#' and re-run. A failure to fit the propensity model is caught and logged with
-#' the same guidance rather than crashing the pipeline.
+#' Redundant covariates (perfectly correlated within the covariate set, e.g.
+#' \code{gender = MALE} in an all-male cohort) are written to
+#' \code{redundantCovariates.csv} for reference; these are removed automatically
+#' by \code{createPs} and need no action. Separately, when a covariate is highly
+#' correlated with \emph{treatment} - typically part of the exposure definition,
+#' such as the drug's administration procedure - \code{createPs} stops and names
+#' it; that failure is caught and logged with guidance to add the offending
+#' concept ids to \code{excludedCovariateConceptIds} and re-run, rather than
+#' crashing the pipeline.
 #'
 #' The outcome set and the incident/recurrent (chronic) classification are read
 #' from \code{inst/settings/IRsettings.csv}; chronic outcomes remove subjects
@@ -185,7 +188,7 @@ runCohortMethodAnalysis <- function(connectionDetails,
                                     minCohortSize = 100,
                                     minOutcomeEvents = 10,
                                     correlationThreshold = 0.9,
-                                    forceIfNotComparable = FALSE,
+                                    forceIfNotComparable = TRUE,
                                     databaseId,
                                     minCellCount = 5,
                                     outputFolder,
@@ -255,9 +258,12 @@ runCohortMethodAnalysis <- function(connectionDetails,
     addDescendantsToExclude     = TRUE
   )
 
+  # New-user restrictions (first exposure, washout, common period) are applied at
+  # extraction time in this CohortMethod version, via createGetDbCohortMethodDataArgs.
   cohortMethodData <- CohortMethod::getDbCohortMethodData(
     connectionDetails      = connectionDetails,
     cdmDatabaseSchema      = cdmDatabaseSchema,
+    tempEmulationSchema    = getOption("sqlRenderTempEmulationSchema"),
     targetId               = targetId,
     comparatorId           = comparatorId,
     outcomeIds             = allOutcomeIds,
@@ -265,8 +271,13 @@ runCohortMethodAnalysis <- function(connectionDetails,
     exposureTable          = cohortTable,
     outcomeDatabaseSchema  = cohortDatabaseSchema,
     outcomeTable           = cohortTable,
-    cdmVersion             = "5",
-    covariateSettings      = covariateSettings
+    getDbCohortMethodDataArgs = CohortMethod::createGetDbCohortMethodDataArgs(
+      restrictToCommonPeriod  = TRUE,
+      firstExposureOnly       = TRUE,
+      removeDuplicateSubjects = "keep first",
+      washoutPeriod           = 365,
+      covariateSettings       = covariateSettings
+    )
   )
   on.exit(Andromeda::close(cohortMethodData), add = TRUE)
 
@@ -315,21 +326,25 @@ runCohortMethodAnalysis <- function(connectionDetails,
     redundantDf <- data.frame(
       covariateId   = redundantIds,
       covariateName = nameFor(redundantIds),
-      reason        = "redundant/aliased (perfectly correlated within analysis)",
+      reason        = "redundant/aliased (perfectly correlated within the covariate set)",
       stringsAsFactors = FALSE
     )
     readr::write_excel_csv(
-      redundantDf, file.path(cmFolder, "correlatedCovariates.csv"), na = ""
+      redundantDf, file.path(cmFolder, "redundantCovariates.csv"), na = ""
     )
-    ParallelLogger::logWarn(
-      length(redundantIds), " redundant/correlated covariate(s) detected. ",
-      "They are listed in correlatedCovariates.csv. To drop them from the ",
-      "propensity model, add the corresponding concept ids to the ",
-      "excludedCovariateConceptIds argument and re-run. Covariates: ",
-      paste(utils::head(nameFor(redundantIds), 20), collapse = "; ")
+    # These are covariates that are perfectly correlated WITH EACH OTHER (e.g.
+    # gender = MALE in an all-male cohort). CohortMethod removes them
+    # automatically when it fits the propensity model, so NO user action is
+    # needed for them. This is different from covariates correlated with
+    # TREATMENT, which do require exclusion (handled at the createPs step below).
+    ParallelLogger::logInfo(
+      length(redundantIds), " redundant covariate(s) detected (perfectly ",
+      "correlated within the covariate set). These are removed automatically ",
+      "during propensity-model fitting; listed in redundantCovariates.csv for ",
+      "reference - no action required."
     )
   } else {
-    ParallelLogger::logInfo("No redundant/correlated covariates detected.")
+    ParallelLogger::logInfo("No redundant covariates detected.")
   }
 
   # --------------------------------------------------------------------------
@@ -339,20 +354,29 @@ runCohortMethodAnalysis <- function(connectionDetails,
     {
       pop <- CohortMethod::createStudyPopulation(
         cohortMethodData = cohortMethodData,
+        population       = NULL,
         outcomeId        = NULL,
-        firstExposureOnly      = TRUE,
-        restrictToCommonPeriod = TRUE,
-        washoutPeriod          = 365,
-        removeDuplicateSubjects = "keep first"
+        createStudyPopulationArgs = CohortMethod::createCreateStudyPopulationArgs(
+          removeSubjectsWithPriorOutcome = FALSE
+        )
       )
-      CohortMethod::createPs(cohortMethodData = cohortMethodData, population = pop)
+      # createPs runs CohortMethod's high-correlation check (on by default): it
+      # stops and names any covariate almost perfectly correlated with the
+      # treatment. That error is caught below and logged with guidance.
+      CohortMethod::createPs(
+        cohortMethodData = cohortMethodData,
+        population       = pop
+      )
     },
     error = function(e) {
       ParallelLogger::logError(
         "Failed to fit the propensity model: ", conditionMessage(e), ". ",
-        "This is often caused by correlated / redundant / (near-)separating ",
-        "covariates. Review correlatedCovariates.csv, add the offending ",
-        "concept ids to excludedCovariateConceptIds, and re-run."
+        "When the message reports covariates highly correlated with TREATMENT, ",
+        "they are usually part of the exposure definition - most often the ",
+        "drug's administration procedure (e.g. IV infusion for zoledronic acid, ",
+        "subcutaneous injection for denosumab). Add the offending covariates' ",
+        "concept ids (named in the message above) to excludedCovariateConceptIds ",
+        "and re-run."
       )
       NULL
     }
@@ -380,8 +404,16 @@ runCohortMethodAnalysis <- function(connectionDetails,
   auc <- tryCatch(CohortMethod::computePsAuc(psPopulation),
                   error = function(e) NA_real_)
   auc <- as.numeric(auc)[1]
-  equipoise <- tryCatch(CohortMethod::computeEquipoise(psPopulation),
-                        error = function(e) NA_real_)
+  # Empirical equipoise: fraction of subjects with a preference score in
+  # [0.3, 0.7], computed from the preference score directly so it does not
+  # depend on a specific helper being present in this CohortMethod version.
+  equipoise <- tryCatch(
+    {
+      pref <- CohortMethod::computePreferenceScore(psPopulation)
+      mean(pref$preferenceScore >= 0.3 & pref$preferenceScore <= 0.7, na.rm = TRUE)
+    },
+    error = function(e) NA_real_
+  )
 
   metrics <- data.frame(
     databaseId   = databaseId,
@@ -430,19 +462,17 @@ runCohortMethodAnalysis <- function(connectionDetails,
     )
 
     studyPop <- CohortMethod::createStudyPopulation(
-      cohortMethodData        = cohortMethodData,
-      population              = psPopulation,
-      outcomeId               = outcomeId,
-      firstExposureOnly       = TRUE,
-      restrictToCommonPeriod  = TRUE,
-      washoutPeriod           = 365,
-      removeDuplicateSubjects = "keep first",
-      removeSubjectsWithPriorOutcome = isChronic,
-      minDaysAtRisk           = 1,
-      riskWindowStart         = riskWindowStart,
-      startAnchor             = "cohort start",
-      riskWindowEnd           = riskWindowEnd,
-      endAnchor               = "cohort start"
+      cohortMethodData = cohortMethodData,
+      population       = psPopulation,
+      outcomeId        = outcomeId,
+      createStudyPopulationArgs = CohortMethod::createCreateStudyPopulationArgs(
+        removeSubjectsWithPriorOutcome = isChronic,
+        minDaysAtRisk   = 1,
+        riskWindowStart = riskWindowStart,
+        startAnchor     = "cohort start",
+        riskWindowEnd   = riskWindowEnd,
+        endAnchor       = "cohort start"
+      )
     )
 
     # Adjust (match or weight)
@@ -450,9 +480,11 @@ runCohortMethodAnalysis <- function(connectionDetails,
       if (psMethod == "matching") {
         CohortMethod::matchOnPs(
           population    = studyPop,
-          caliper       = 0.2,
-          caliperScale  = "standardized logit",
-          maxRatio      = 1
+          matchOnPsArgs = CohortMethod::createMatchOnPsArgs(
+            caliper      = 0.2,
+            caliperScale = "standardized logit",
+            maxRatio     = 1
+          )
         )
       } else {
         studyPop  # IPTW uses the PS directly in fitOutcomeModel
@@ -491,7 +523,12 @@ runCohortMethodAnalysis <- function(connectionDetails,
         ),
         error = function(e) ParallelLogger::logWarn("    balance plot failed: ", conditionMessage(e))
       )
-      maxSdmAfter <- suppressWarnings(max(abs(balance$afterMatchingStdDiff), na.rm = TRUE))
+      afterCol <- balance$afterMatchingStdDiff
+      maxSdmAfter <- if (is.null(afterCol) || all(is.na(afterCol))) {
+        NA_real_
+      } else {
+        max(abs(afterCol), na.rm = TRUE)
+      }
       balance$outcomeId  <- outcomeId
       balance$databaseId <- databaseId
       balanceList[[length(balanceList) + 1L]] <- balance
@@ -502,11 +539,13 @@ runCohortMethodAnalysis <- function(connectionDetails,
     # Cox proportional-hazards outcome model
     om <- tryCatch(
       CohortMethod::fitOutcomeModel(
-        population        = adjPop,
-        cohortMethodData  = cohortMethodData,
-        modelType         = "cox",
-        stratified        = (psMethod == "matching"),
-        inversePtWeighting = (psMethod == "weighting")
+        population       = adjPop,
+        cohortMethodData = cohortMethodData,
+        fitOutcomeModelArgs = CohortMethod::createFitOutcomeModelArgs(
+          modelType          = "cox",
+          stratified         = (psMethod == "matching"),
+          inversePtWeighting = (psMethod == "weighting")
+        )
       ),
       error = function(e) {
         ParallelLogger::logWarn("    fitOutcomeModel failed: ", conditionMessage(e))

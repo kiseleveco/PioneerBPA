@@ -8,6 +8,8 @@ SELECT
   t.za_start_date,
   t.denosumab_start_date,
   t.bpa_type,
+  t.aa_start_date,
+  t.allBPA_start_date,
   t.adt_start_date,
   t.arpi_start_date,
   t.chemo_start_date,

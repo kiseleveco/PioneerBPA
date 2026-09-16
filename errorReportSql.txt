@@ -2,18 +2,12 @@ DBMS:
 redshift
 
 Error:
-com.amazon.redshift.util.RedshiftException: ERROR: aggregates not allowed in GROUP BY clause
+com.amazon.redshift.util.RedshiftException: ERROR: relation "#cohort_src" does not exist
 
 SQL:
-SELECT DATE_PART(year, MIN(observation_period_start_date)) AS first_start_year,
-       COUNT(*) AS num_patients
-FROM (
-    SELECT person_id, MIN(observation_period_start_date) AS observation_period_start_date
-    FROM marketscan_ccaemdcr_aug2025.observation_period
-    GROUP BY person_id
-) t
-GROUP BY 1
-ORDER BY 1;
+SELECT *
+                            FROM #cohort_src
+                            LIMIT 10
 
 R version:
 R version 4.3.3 (2024-02-29)
@@ -25,8 +19,8 @@ Attached base packages:
 - stats
 - graphics
 - grDevices
-- utils
 - datasets
+- utils
 - methods
 - base
 

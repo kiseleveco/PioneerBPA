@@ -2,8 +2,11 @@ cohortId,cohortName,cohortDescription
 90100,Bone metastasis index,Individuals with a non-missing bone-metastasis date falling within -90 to +30 days of the metastasis date. Cohort start is the bone-metastasis date; cohort end is taken from the metastasis cohort record.
 90200,Any bone-targeting agent (BPA),Individuals with a zoledronic acid (ZA) and/or denosumab start. Cohort start is the earlier of the two BPA start dates (ties assigned to ZA); cohort end is taken from the metastasis cohort record.
 90300,No bone-targeting agent (BPA),"Individuals with no ZA and no denosumab start, who received at least one of ADT, ARPI, or chemotherapy. Cohort start is the earliest of the ADT/ARPI/chemo start dates (same-day ties resolved ADT > ARPI > chemo); cohort end is taken from the metastasis cohort record."
+90400,No ANY bone-targeting agent,"include individuals from 90100 with NO BPA (cohort 1822) treatment initiation later then 30 days before bone metastasis date. Index is the date of Systemic treatment initiation  (ADT OR ARPI OR Chemo). It’s a sensitivity cohort"
 90210,BPA: Denosumab,Individuals in the BPA population whose first bone-targeting agent is denosumab. Cohort start is the denosumab start date; cohort end is taken from the metastasis cohort record.
 90220,BPA: Zoledronic acid (ZA),Individuals in the BPA population whose first bone-targeting agent is ZA. Cohort start is the ZA start date; cohort end is taken from the metastasis cohort record.
+90230,BPA: Aledronic acid (AA),Individuals in the BPA population whose first bone-targeting agent is AA. Cohort start is the AA start date; cohort end is taken from the metastasis cohort record. It’s a sensitivity cohort
+90240,BPA: Other BPA,"Individuals in the BPA population whose first bone-targeting agent is not Denosumab, not ZA and not AA. Cohort start is the bpa start date; cohort end is taken from the metastasis cohort record. It’s a sensitivity cohort"
 90211,Denosumab + ADT only,"Denosumab individuals with ADT started within -30 to +180 days of the metastasis date, and no ARPI or chemotherapy within that window. Cohort start is the denosumab start date; cohort end is taken from the metastasis cohort record."
 90212,Denosumab + ADT + ARPI,"Denosumab individuals with both ADT and ARPI started within -30 to +180 days of the metastasis date, and no chemotherapy within that window. Cohort start is the denosumab start date; cohort end is taken from the metastasis cohort record."
 90213,Denosumab + ADT + chemotherapy,"Denosumab individuals with both ADT and chemotherapy started within -30 to +180 days of the metastasis date, and no ARPI within that window. Cohort start is the denosumab start date; cohort end is taken from the metastasis cohort record."
@@ -12,3 +15,11 @@ cohortId,cohortName,cohortDescription
 90222,ZA + ADT + ARPI,"ZA individuals with both ADT and ARPI started within -30 to +180 days of the metastasis date, and no chemotherapy within that window. Cohort start is the ZA start date; cohort end is taken from the metastasis cohort record."
 90223,ZA + ADT + chemotherapy,"ZA individuals with both ADT and chemotherapy started within -30 to +180 days of the metastasis date, and no ARPI within that window. Cohort start is the ZA start date; cohort end is taken from the metastasis cohort record."
 90224,ZA + ADT + ARPI + chemotherapy,"ZA individuals with ADT, ARPI, and chemotherapy all started within -30 to +180 days of the metastasis date. Cohort start is the ZA start date; cohort end is taken from the metastasis cohort record."
+90231,AA + ADT. It's a sensitivity cohort
+90232,AA + ADT + ARPI. It's a sensitivity cohort
+90233,AA + ADT + Chemo. It's a sensitivity cohort
+90234,AA + ADT + ARPI + Chemo. It's a sensitivity cohort
+90241,other BPA + ADT. It's a sensitivity cohort
+90242,other BPA + ADT + ARPI. It's a sensitivity cohort
+90243,other BPA + ADT + Chemo. It's a sensitivity cohort
+90244,other BPA + ADT + ARPI + Chemo. It's a sensitivity cohort
