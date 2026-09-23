@@ -14,3 +14,5 @@ cohort_name,cohortId,atlasId
 [RQ2_BPA] Hypercalcemia,1777,1777
 [RQ2_BPA] Spinal cord compression,1776,1776
 [RQ2_BPA] Bone fracture,1775,1775
+[RQ2_BPA] Any BPA,1822,1822
+[RQ2_BPA] AA,1823,1823

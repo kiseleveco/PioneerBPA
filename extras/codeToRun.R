@@ -48,11 +48,11 @@ cohortTable              <- "cohortBPA"
 cohortTableNew           <- "cohortTableNew"
 targetTable              <- "targetTable"
 
-databaseId          <- "MarketScan"           # short identifier, no spaces
+databaseId          <- "MarketScan2025"           # short identifier, no spaces
 databaseName        <- "MarketScan aug2025"
 databaseDescription <- "MarketScan aug2025"
 
-outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA"))
+outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA_sensitivity"))
 
 # Temp table emulation (Oracle / some Spark configs)
 options(sqlRenderTempEmulationSchema = NULL)
@@ -68,17 +68,22 @@ adt               <- 1772
 arpi              <- 1773
 chemo             <- 1774
 
+#Sensitivity arguments
+bpaAa <- 1823
+bpaAll  <- 1822
+sensitivity <- TRUE
+
 # ------------------------------------------------------------------------------
 # 4. Run options
 # ------------------------------------------------------------------------------
 includeCohortStats <- FALSE
 incrementalCohorts <- TRUE
-generateCohorts <- FALSE
-createTargetTable <- FALSE
-createDerivedCohorts <- FALSE
-runDiagnostics <- FALSE
-runIRandTTEAnalysis <- TRUE
-runComparativeEffectiveness <- TRUE
+generateCohorts <- TRUE
+createTargetTable <- TRUE
+createDerivedCohorts <- TRUE
+runDiagnostics <- TRUE
+runIRandTTEAnalysis <- FALSE
+runComparativeEffectiveness <- FALSE
 
 ## Comparative effectiveness (denosumab vs ZA) options
 ## RxNorm INGREDIENT concept ids for denosumab and zoledronic acid (and their
@@ -86,7 +91,12 @@ runComparativeEffectiveness <- TRUE
 ## the exposure leaks into the propensity model and invalidates it.
 ##   denosumab ingredient concept id  = <fill in>
 ##   zoledronic acid ingredient concept id = <fill in>
-excludedDrugConcepts <- c()          # e.g. c(1594045, 1524674)
+
+excludedCovariateConceptIds <- read.csv(
+  system.file("settings", "conceptsToExclude.csv", package = "PioneerBPA"),
+  header = FALSE
+  )$V1
+
 psMethod             <- "matching"   # or "weighting" (stabilized IPTW)
 
 # ------------------------------------------------------------------------------
@@ -108,6 +118,9 @@ PioneerBPA::execute(
   targetBones              = target_bones,
   bpaZa                    = bpa_za,
   bpaDenosumab             = bpa_denosumab,
+  bpaAa                    = bpaAa,
+  bpaAll                   = bpaAll,
+  sensitivity              = sensitivity,
   adt                      = adt,
   arpi                     = arpi,
   chemo                    = chemo,
@@ -120,5 +133,5 @@ PioneerBPA::execute(
   runIRandTTEAnalysis      = runIRandTTEAnalysis,
   runComparativeEffectiveness = runComparativeEffectiveness,
   psMethod                    = psMethod,
-  excludedCovariateConceptIds = excludedDrugConcepts
+  excludedCovariateConceptIds = excludedCovariateConceptIds
 )

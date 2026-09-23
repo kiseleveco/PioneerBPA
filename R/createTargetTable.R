@@ -61,10 +61,13 @@ createTargetTable <- function(connectionDetails,
                               targetBones,
                               bpaZa,
                               bpaDenosumab,
+                              bpaAa,
+                              bpaAll,
                               adt,
                               arpi,
                               chemo,
-                              packageName = "PioneerBPA") {
+                              packageName = "PioneerBPA",
+                              sensitivity = FALSE) {
 
   # Each step opens its own connection, loads and renders the SQL, executes it,
   # and disconnects. Parameters common to every step are captured from the
@@ -91,9 +94,17 @@ createTargetTable <- function(connectionDetails,
           target_bones      = targetBones)
 
   ## Combine metastasis + bone + BPA
-  runStep("metastasis_bone_bpa_combine.sql",
-          bpa_za        = bpaZa,
-          bpa_denosumab = bpaDenosumab)
+  if (sensitivity) {
+    runStep("metastasis_bone_bpa_sensitivity_combine.sql",
+            bpa_za        = bpaZa,
+            bpa_denosumab = bpaDenosumab,
+            bpa_aa        = bpaAa,
+            bpa_all       = bpaAll)
+  } else {
+    runStep("metastasis_bone_bpa_sensitivity.sql",
+            bpa_za        = bpaZa,
+            bpa_denosumab = bpaDenosumab)
+  }
 
   ## Combine metastasis + bone + BPA + systemic treatment
   runStep("Systemic_treatment_join.sql",
