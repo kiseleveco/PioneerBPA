@@ -84,6 +84,7 @@ createDerivedCohorts <- TRUE
 runDiagnostics <- TRUE
 runIRandTTEAnalysis <- FALSE
 runComparativeEffectiveness <- FALSE
+runTreatmentPatterns <- TRUE
 
 ## Comparative effectiveness (denosumab vs ZA) options
 ## RxNorm INGREDIENT concept ids for denosumab and zoledronic acid (and their
@@ -132,6 +133,7 @@ PioneerBPA::execute(
   runDiagnostics           = runDiagnostics,
   runIRandTTEAnalysis      = runIRandTTEAnalysis,
   runComparativeEffectiveness = runComparativeEffectiveness,
+  runTreatmentPatterns        = runTreatmentPatterns,
   psMethod                    = psMethod,
   excludedCovariateConceptIds = excludedCovariateConceptIds
 )

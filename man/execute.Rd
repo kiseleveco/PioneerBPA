@@ -33,6 +33,7 @@ execute(
   packageName = "PioneerBPA",
   runIRandTTEAnalysis = TRUE,
   runComparativeEffectiveness = TRUE,
+  runTreatmentPatterns = TRUE,
   psMethod = c("matching", "weighting"),
   excludedCovariateConceptIds = c(),
   cmRiskWindowStart = 1,
@@ -103,6 +104,9 @@ first).}
 
 \item{runComparativeEffectiveness}{Logical. Run the comparative-effectiveness
 (CohortMethod) step.}
+
+\item{runTreatmentPatterns}{Logical. Run the treatment-pattern / switch
+analysis step.}
 
 \item{psMethod}{Propensity-score adjustment for the comparative-effectiveness
 step: \code{"matching"} (default) or \code{"weighting"}.}
