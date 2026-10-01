@@ -106,7 +106,7 @@ runDerivedCohortDiagnostics <- function(connectionDetails,
     useChads2                           = TRUE,
     useChads2Vasc                       = TRUE,
     useHfrs                             = FALSE,
-    useCareSiteId                       = TRUE,
+    useCareSiteId                       = FALSE, # covariate_id = care_site_id * 1000 + 12 overflows Redshift's 4-byte INT (FeatureExtraction casts it back to INT) when care_site_id values are large
     temporalStartDays = c(
       -9999, # anytime prior
       -365, # long term prior
