@@ -144,6 +144,20 @@ runDerivedCohortDiagnostics <- function(connectionDetails,
   # --- 3. point CohortDiagnostics at the derived cohort table ---------------
   cohortTableNames <- CohortGenerator::getCohortTableNames(cohortTable = cohortTableNew)
 
+  # The derived cohorts were inserted into a bare cohort table, so the companion
+  # statistics tables (<cohortTableNew>_inclusion, _inclusion_result,
+  # _inclusion_stats, _summary_stats, _censor_stats) do not exist. executeDiagnostics
+  # requires them when runInclusionStatistics = TRUE (it exports inclusion-rule
+  # names even for cohorts that carry no inclusion rules). Create the missing
+  # stats tables WITHOUT dropping the populated base table - incremental = TRUE
+  # only creates tables that are absent.
+  CohortGenerator::createCohortTables(
+    connectionDetails    = connectionDetails,
+    cohortDatabaseSchema = cohortDatabaseSchema,
+    cohortTableNames     = cohortTableNames,
+    incremental          = TRUE
+  )
+
   # --- 4. run ----------------------------------------------------------------
   CohortDiagnostics::executeDiagnostics(
     cohortDefinitionSet       = cohortDefinitionSet,

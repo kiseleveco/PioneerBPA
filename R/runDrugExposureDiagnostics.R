@@ -100,6 +100,15 @@ runDrugExposureDiagnostics <- function(connectionDetails,
   # --------------------------------------------------------------------------
   cohortTableNames <- CohortGenerator::getCohortTableNames(cohortTable = cohortTableNew)
 
+  # Ensure the companion stats tables exist (the derived cohorts live in a bare
+  # table); incremental = TRUE preserves the populated base table.
+  CohortGenerator::createCohortTables(
+    connectionDetails    = connectionDetails,
+    cohortDatabaseSchema = cohortDatabaseSchema,
+    cohortTableNames     = cohortTableNames,
+    incremental          = TRUE
+  )
+
   CohortDiagnostics::executeDiagnostics(
     cohortDefinitionSet       = cohortDefinitionSet,
     exportFolder              = exportFolder,
