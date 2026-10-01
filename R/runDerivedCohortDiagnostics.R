@@ -106,6 +106,7 @@ runDerivedCohortDiagnostics <- function(connectionDetails,
     useChads2                           = TRUE,
     useChads2Vasc                       = TRUE,
     useHfrs                             = FALSE,
+    useCareSiteId                       = TRUE,
     temporalStartDays = c(
       -9999, # anytime prior
       -365, # long term prior
@@ -160,10 +161,10 @@ runDerivedCohortDiagnostics <- function(connectionDetails,
     minCellCount              = minCellCount,
     temporalCovariateSettings = temporalCovariateSettings,
     # concept-based diagnostics need real cohort JSON -> off for pre-built cohorts
-    runInclusionStatistics        = FALSE,
-    runIncludedSourceConcepts     = FALSE,
+    runInclusionStatistics        = TRUE,
+    runIncludedSourceConcepts     = TRUE,
     runOrphanConcepts             = FALSE,
-    runBreakdownIndexEvents       = FALSE,
+    runBreakdownIndexEvents       = TRUE,
     # these run off the generated cohort table -> keep on
     runVisitContext               = TRUE,
     runIncidenceRate              = TRUE,

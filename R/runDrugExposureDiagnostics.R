@@ -91,7 +91,8 @@ runDrugExposureDiagnostics <- function(connectionDetails,
     includedCovariateConceptIds = drugConceptId,    # restrict to this concept ...
     addDescendantsToInclude     = addDescendants,   # ... and its descendants
     temporalStartDays           = temporalStartDay, # single window: -30 ...
-    temporalEndDays             = temporalEndDay    # ... to +365 days
+    temporalEndDays             = temporalEndDay,    # ... to +365 days
+    useDistinctIngredientCount  = TRUE
   )
 
   # --------------------------------------------------------------------------
