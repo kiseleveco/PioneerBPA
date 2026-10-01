@@ -131,6 +131,7 @@ documentation.
 | `R/runIRandTTE.R` | `runIRandTTEAnalysis()` | Incidence rates (Poisson CI) and Kaplan-Meier time-to-event for the safety outcomes. |
 | `R/runCohortMethodAnalysis.R` | `runCohortMethodAnalysis()` | Comparative effectiveness (denosumab vs ZA): LASSO propensity scores, matching/weighting, Cox models. |
 | `R/runTreatmentPatternAnalysis.R` | `runTreatmentPatternAnalysis()` | Dosing-regimen (continuous-exposure) episodes by interval band, and denosumab/ZA switching. |
+| `R/runSensitivityAnalysis.R` | `runSensitivityAnalysis()` | Isolated sensitivity cohorts (own target + derived tables) with AA / other-BPA / no-any-BPA arms; reports counts to a `sensitivity/` folder. |
 
 Supporting resources under `inst/`:
 

@@ -40,6 +40,8 @@
 #'     \code{\link{runCohortMethodAnalysis}}.
 #'   \item \strong{runTreatmentPatterns} - reconstruct dosing regimens and
 #'     denosumab/ZA switching with \code{\link{runTreatmentPatternAnalysis}}.
+#'   \item \strong{runSensitivity} - build an isolated set of sensitivity
+#'     cohorts and report their counts with \code{\link{runSensitivityAnalysis}}.
 #' }
 #'
 #' @param connectionDetails        DatabaseConnector connection details object.
@@ -87,6 +89,8 @@
 #'   (CohortMethod) step.
 #' @param runTreatmentPatterns     Logical. Run the treatment-pattern / switch
 #'   analysis step.
+#' @param runSensitivity           Logical. Run the isolated sensitivity cohort
+#'   analysis (needs \code{bpaAa} and \code{bpaAll}). Default \code{FALSE}.
 #' @param psMethod                 Propensity-score adjustment for the
 #'   comparative-effectiveness step: \code{"matching"} (default) or
 #'   \code{"weighting"}.
@@ -119,7 +123,6 @@ execute <- function(connectionDetails,
                     bpaDenosumab,
                     bpaAa               = NULL,
                     bpaAll              = NULL,
-                    sensitivity,
                     adt,
                     arpi,
                     chemo,
@@ -135,6 +138,7 @@ execute <- function(connectionDetails,
                     runIRandTTEAnalysis    = TRUE,
                     runComparativeEffectiveness = TRUE,
                     runTreatmentPatterns   = TRUE,
+                    runSensitivity         = FALSE,
                     psMethod               = c("matching", "weighting"),
                     excludedCovariateConceptIds = c(),
                     cmRiskWindowStart      = 1,
@@ -179,7 +183,6 @@ execute <- function(connectionDetails,
       bpaDenosumab         = bpaDenosumab,
       bpaAa                = bpaAa,
       bpaAll               = bpaAll,
-      sensitivity          = sensitivity,
       adt                  = adt,
       arpi                 = arpi,
       chemo                = chemo,
@@ -318,6 +321,31 @@ execute <- function(connectionDetails,
       cohortDatabaseSchema = cohortDatabaseSchema,
       drugCohortTable      = cohortTable,
       armCohortTable       = cohortTableNew,
+      databaseId           = databaseId,
+      outputFolder         = outputFolder,
+      minCellCount         = minCellCount,
+      packageName          = packageName
+    )
+  }
+
+  # --------------------------------------------------------------------------
+  # 8. Sensitivity cohorts (isolated: own target + derived tables, own folder)
+  # --------------------------------------------------------------------------
+  if (runSensitivity) {
+    ParallelLogger::logInfo("Running sensitivity cohort analysis")
+    PioneerBPA::runSensitivityAnalysis(
+      connectionDetails    = connectionDetails,
+      cohortDatabaseSchema = cohortDatabaseSchema,
+      cohortTable          = cohortTable,
+      targetMetastasis     = targetMetastasis,
+      targetBones          = targetBones,
+      bpaZa                = bpaZa,
+      bpaDenosumab         = bpaDenosumab,
+      bpaAa                = bpaAa,
+      bpaAll               = bpaAll,
+      adt                  = adt,
+      arpi                 = arpi,
+      chemo                = chemo,
       databaseId           = databaseId,
       outputFolder         = outputFolder,
       minCellCount         = minCellCount,

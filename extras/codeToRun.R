@@ -71,7 +71,6 @@ chemo             <- 1774
 #Sensitivity arguments
 bpaAa <- 1823
 bpaAll  <- 1822
-sensitivity <- FALSE
 
 # ------------------------------------------------------------------------------
 # 4. Run options
@@ -86,6 +85,7 @@ runDrugExposureDiagnostics <- FALSE
 runIRandTTEAnalysis <- FALSE
 runComparativeEffectiveness <- FALSE
 runTreatmentPatterns <- FALSE
+runSensitivity <- TRUE   # isolated sensitivity cohorts + counts (needs bpaAa / bpaAll)
 
 ## Comparative effectiveness (denosumab vs ZA) options
 ## RxNorm INGREDIENT concept ids for denosumab and zoledronic acid (and their
@@ -122,7 +122,6 @@ PioneerBPA::execute(
   bpaDenosumab             = bpa_denosumab,
   bpaAa                    = bpaAa,
   bpaAll                   = bpaAll,
-  sensitivity              = sensitivity,
   adt                      = adt,
   arpi                     = arpi,
   chemo                    = chemo,
@@ -136,6 +135,7 @@ PioneerBPA::execute(
   runIRandTTEAnalysis      = runIRandTTEAnalysis,
   runComparativeEffectiveness = runComparativeEffectiveness,
   runTreatmentPatterns        = runTreatmentPatterns,
+  runSensitivity              = runSensitivity,
   psMethod                    = psMethod,
   excludedCovariateConceptIds = excludedCovariateConceptIds
 )

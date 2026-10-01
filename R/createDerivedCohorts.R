@@ -69,11 +69,7 @@ createDerivedCohorts <- function(connectionDetails = NULL,
   # not a cohort and is not listed in the CSV, so prepend it explicitly.
   csvPath <- system.file("settings", "DerivedCohorts.csv", package = packageName)
   derivedCohorts <- read.csv(csvPath, stringsAsFactors = FALSE)
-  if (sensitivity) {
-    sqlFiles <- c("cohort_src_sensitivity", as.character(derivedCohorts$cohortId))
-  } else {
-    sqlFiles <- c("cohort_src", as.character(derivedCohorts$cohortId))
-  }
+  sqlFiles <- c("cohort_src", as.character(derivedCohorts$cohortId))
 
   if (is.null(connection)) {
     connection <- DatabaseConnector::connect(connectionDetails)
@@ -87,12 +83,6 @@ createDerivedCohorts <- function(connectionDetails = NULL,
 
   if (deleteExisting) {
     cohortIds <- as.integer(setdiff(sqlFiles, "cohort_src"))
-    if (sensitivity) {
-      cohortIds <- as.integer(setdiff(sqlFiles, "cohort_src_sensitivity"))
-    } else {
-      cohortIds <- as.integer(setdiff(sqlFiles, "cohort_src"))
-    }
-
     sql <- SqlRender::render("DELETE FROM @schema.@table WHERE cohort_definition_id IN (@ids);",
                              schema = cohortDatabaseSchema,
                              table  = cohortTableNew,
