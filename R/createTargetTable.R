@@ -101,7 +101,7 @@ createTargetTable <- function(connectionDetails,
             bpa_aa        = bpaAa,
             bpa_all       = bpaAll)
   } else {
-    runStep("metastasis_bone_bpa_sensitivity.sql",
+    runStep("metastasis_bone_bpa_combine.sql",
             bpa_za        = bpaZa,
             bpa_denosumab = bpaDenosumab)
   }

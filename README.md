@@ -129,6 +129,7 @@ documentation.
 | `R/runDerivedCohortDiagnostics.R` | `runDerivedCohortDiagnostics()` | Runs CohortDiagnostics on the derived cohorts. |
 | `R/runIRandTTE.R` | `runIRandTTEAnalysis()` | Incidence rates (Poisson CI) and Kaplan-Meier time-to-event for the safety outcomes. |
 | `R/runCohortMethodAnalysis.R` | `runCohortMethodAnalysis()` | Comparative effectiveness (denosumab vs ZA): LASSO propensity scores, matching/weighting, Cox models. |
+| `R/runTreatmentPatternAnalysis.R` | `runTreatmentPatternAnalysis()` | Dosing-regimen (continuous-exposure) episodes by interval band, and denosumab/ZA switching. |
 
 Supporting resources under `inst/`:
 
@@ -182,6 +183,28 @@ Outputs land in `<outputFolder>/comparativeEffectiveness/`: `ps_90210_vs_90220.p
 `psModelMetrics.csv`, `comparabilityDecision.csv`, `covariateBalance*.{csv,png}`,
 `correlatedCovariates.csv` (if any), and `outcomeModelResults.csv` (hazard
 ratios with 95% CIs).
+
+## Treatment patterns (dosing regimens & switching)
+
+`runTreatmentPatternAnalysis()` reconstructs each patient's dosing timeline for
+the two arms — denosumab (`90210`) and ZA (`90220`) — from the individual
+administration events (cohorts `1771` / `1770`) and splits it into
+**continuous-exposure episodes** by dosing-interval band:
+
+- **Denosumab:** every 3–5 weeks, or every 4–7 months.
+- **ZA:** every 3–5 weeks, every 11–13 weeks, or every 10–13 months.
+
+An episode is a *maximal run of consecutive administrations whose gaps all fall
+in the same band*, so different regimens (e.g. 3–5 wk vs 11–13 wk) are never
+merged; a gap outside every band ends the episode. Per arm it reports, for each
+band, the number of individuals, the average continuous-treatment length, and
+the average number of doses — plus two summary rows: `ALL` (mean index →
+last-dose span and dose count over the whole arm) and `NO_REGIMEN` (the same for
+patients who match no band). It also detects **switching** to the other agent
+more than 30 days after index.
+
+Outputs land in `<outputFolder>/treatmentPatterns/`:
+`treatmentPatternRegimens.csv` and `treatmentSwitch.csv`.
 
 ## Refreshing cohort definitions from Atlas
 

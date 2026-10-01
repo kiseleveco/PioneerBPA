@@ -2,12 +2,24 @@ DBMS:
 redshift
 
 Error:
-com.amazon.redshift.util.RedshiftException: ERROR: relation "#cohort_src" does not exist
+java.lang.NullPointerException: fields must be non-null
 
 SQL:
-SELECT *
-                            FROM #cohort_src
-                            LIMIT 10
+  WITH ranked_times AS (
+      SELECT
+          cohort_definition_id,
+          checksum,
+          start_time,
+          end_time,
+          ROW_NUMBER() OVER (PARTITION BY cohort_definition_id  ORDER BY end_time  DESC ) AS rank
+      FROM
+          marketscan_ccaemdcr_aug2025_results.cohortBPA_checksum
+     WHERE end_time IS NOT NULL
+  )
+  SELECT cohort_definition_id, checksum, start_time, end_time
+  FROM ranked_times
+  WHERE rank = 1;
+  
 
 R version:
 R version 4.3.3 (2024-02-29)

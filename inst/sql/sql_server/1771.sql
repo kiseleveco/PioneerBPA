@@ -50,7 +50,7 @@ JOIN #Codesets cs on (de.drug_concept_id = cs.concept_id and cs.codeset_id = 1)
 	JOIN @cdm_database_schema.observation_period OP on E.person_id = OP.person_id and E.start_date >=  OP.observation_period_start_date and E.start_date <= op.observation_period_end_date
   WHERE DATEADD(day,0,OP.OBSERVATION_PERIOD_START_DATE) <= E.START_DATE AND DATEADD(day,0,E.START_DATE) <= OP.OBSERVATION_PERIOD_END_DATE
 ) P
-WHERE P.ordinal = 1
+
 -- End Primary Events
 ) pe
   
@@ -78,7 +78,7 @@ FROM (
   ) MG -- matching groups
 
 ) Results
-WHERE Results.ordinal = 1
+
 ;
 
 -- custom era strategy
@@ -117,7 +117,7 @@ JOIN
     JOIN 
     (
       --cteEndDates
-      select PERSON_ID, DATEADD(day,-1 * 180,EVENT_DATE) as END_DATE -- unpad the end date by 180
+      select PERSON_ID, DATEADD(day,-1 * 0,EVENT_DATE) as END_DATE -- unpad the end date by 0
       FROM
       (
 				select PERSON_ID, EVENT_DATE, EVENT_TYPE, 
@@ -131,8 +131,8 @@ JOIN
 
 					UNION ALL
 
-					-- add the end dates with NULL as the row number, padding the end dates by 180 to allow a grace period for overlapping ranges.
-					select PERSON_ID, DATEADD(day,180,DRUG_EXPOSURE_END_DATE), 1 as EVENT_TYPE, NULL
+					-- add the end dates with NULL as the row number, padding the end dates by 0 to allow a grace period for overlapping ranges.
+					select PERSON_ID, DATEADD(day,0,DRUG_EXPOSURE_END_DATE), 1 as EVENT_TYPE, NULL
 					FROM #drugTarget D
 				) RAWDATA
       ) E

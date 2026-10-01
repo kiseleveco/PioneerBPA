@@ -35,6 +35,8 @@
 #'   \item \strong{runComparativeEffectiveness} - compare denosumab vs
 #'     zoledronic acid (propensity-score matched/weighted Cox models) with
 #'     \code{\link{runCohortMethodAnalysis}}.
+#'   \item \strong{runTreatmentPatterns} - reconstruct dosing regimens and
+#'     denosumab/ZA switching with \code{\link{runTreatmentPatternAnalysis}}.
 #' }
 #'
 #' @param connectionDetails        DatabaseConnector connection details object.
@@ -78,6 +80,8 @@
 #'   time-to-event safety analysis step.
 #' @param runComparativeEffectiveness Logical. Run the comparative-effectiveness
 #'   (CohortMethod) step.
+#' @param runTreatmentPatterns     Logical. Run the treatment-pattern / switch
+#'   analysis step.
 #' @param psMethod                 Propensity-score adjustment for the
 #'   comparative-effectiveness step: \code{"matching"} (default) or
 #'   \code{"weighting"}.
@@ -124,6 +128,7 @@ execute <- function(connectionDetails,
                     packageName            = "PioneerBPA",
                     runIRandTTEAnalysis    = TRUE,
                     runComparativeEffectiveness = TRUE,
+                    runTreatmentPatterns   = TRUE,
                     psMethod               = c("matching", "weighting"),
                     excludedCovariateConceptIds = c(),
                     cmRiskWindowStart      = 1,
@@ -272,6 +277,25 @@ execute <- function(connectionDetails,
       minCellCount                = minCellCount,
       outputFolder                = outputFolder,
       packageName                 = packageName
+    )
+  }
+
+  # --------------------------------------------------------------------------
+  # 7. Treatment-pattern (dosing regimen) and denosumab/ZA switch analysis.
+  #    Reads administration events (1770/1771) from cohortTable and the arm
+  #    cohorts (90210/90220) from cohortTableNew.
+  # --------------------------------------------------------------------------
+  if (runTreatmentPatterns) {
+    ParallelLogger::logInfo("Running treatment-pattern analysis")
+    PioneerBPA::runTreatmentPatternAnalysis(
+      connectionDetails    = connectionDetails,
+      cohortDatabaseSchema = cohortDatabaseSchema,
+      drugCohortTable      = cohortTable,
+      armCohortTable       = cohortTableNew,
+      databaseId           = databaseId,
+      outputFolder         = outputFolder,
+      minCellCount         = minCellCount,
+      packageName          = packageName
     )
   }
 
