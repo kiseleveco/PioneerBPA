@@ -30,6 +30,7 @@ execute(
   createTargetTable = TRUE,
   createDerivedCohorts = TRUE,
   runDiagnostics = TRUE,
+  runDrugExposureDiagnostics = TRUE,
   packageName = "PioneerBPA",
   runIRandTTEAnalysis = TRUE,
   runComparativeEffectiveness = TRUE,
@@ -95,6 +96,9 @@ execute(
 \item{createDerivedCohorts}{Logical. Run the derived cohort step.}
 
 \item{runDiagnostics}{Logical. Run the diagnostics step.}
+
+\item{runDrugExposureDiagnostics}{Logical. Run the focused drug-exposure
+characterisation step.}
 
 \item{packageName}{Name of this package.}
 

@@ -28,6 +28,9 @@
 #'     \code{\link{createDerivedCohorts}}.
 #'   \item \strong{runDiagnostics} - characterise the derived cohorts with
 #'     \code{\link{runDerivedCohortDiagnostics}}.
+#'   \item \strong{runDrugExposureDiagnostics} - focused drug-exposure
+#'     characterisation of the derived cohorts with
+#'     \code{\link{runDrugExposureDiagnostics}}.
 #'   \item \strong{runIRandTTEAnalysis} - append the target cohorts into the base
 #'     cohort table (\code{\link{appendDerivedCohortsToBase}}) and estimate
 #'     incidence rates and time-to-event for the safety outcomes with
@@ -76,6 +79,8 @@
 #' @param createTargetTable        Logical. Run the target table step.
 #' @param createDerivedCohorts     Logical. Run the derived cohort step.
 #' @param runDiagnostics           Logical. Run the diagnostics step.
+#' @param runDrugExposureDiagnostics Logical. Run the focused drug-exposure
+#'   characterisation step.
 #' @param runIRandTTEAnalysis      Logical. Run the incidence-rate /
 #'   time-to-event safety analysis step.
 #' @param runComparativeEffectiveness Logical. Run the comparative-effectiveness
@@ -125,6 +130,7 @@ execute <- function(connectionDetails,
                     createTargetTable      = TRUE,
                     createDerivedCohorts   = TRUE,
                     runDiagnostics         = TRUE,
+                    runDrugExposureDiagnostics = TRUE,
                     packageName            = "PioneerBPA",
                     runIRandTTEAnalysis    = TRUE,
                     runComparativeEffectiveness = TRUE,
@@ -220,6 +226,26 @@ execute <- function(connectionDetails,
       vocabularyDatabaseSchema = vocabularyDatabaseSchema,
       minCellCount         = minCellCount,
       packageName          = packageName
+    )
+  }
+
+  # --------------------------------------------------------------------------
+  # 4b. Focused drug-exposure characterisation of the derived cohorts
+  # --------------------------------------------------------------------------
+  if (runDrugExposureDiagnostics) {
+    ParallelLogger::logInfo("Running drug-exposure diagnostics")
+    PioneerBPA::runDrugExposureDiagnostics(
+      connectionDetails        = connectionDetails,
+      cdmDatabaseSchema        = cdmDatabaseSchema,
+      vocabularyDatabaseSchema = vocabularyDatabaseSchema,
+      cohortDatabaseSchema     = cohortDatabaseSchema,
+      cohortTableNew           = cohortTableNew,
+      databaseId               = databaseId,
+      databaseName             = databaseName,
+      databaseDescription      = databaseDescription,
+      outputFolder             = outputFolder,
+      minCellCount             = minCellCount,
+      packageName              = packageName
     )
   }
 

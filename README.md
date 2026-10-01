@@ -127,6 +127,7 @@ documentation.
 | `R/createCohortTableNew.R` | `createCohortTableNew()` | Creates (drop-and-recreate) the derived cohort table. |
 | `R/appendDerivedCohorts.R` | `appendDerivedCohortsToBase()` | Copies the derived target cohorts into the base cohort table (end-of-observation end date) so targets and outcomes share one table. |
 | `R/runDerivedCohortDiagnostics.R` | `runDerivedCohortDiagnostics()` | Runs CohortDiagnostics on the derived cohorts. |
+| `R/runDrugExposureDiagnostics.R` | `runDrugExposureDiagnostics()` | Focused CohortDiagnostics run: drug exposure only, one concept + window, on the derived cohorts. |
 | `R/runIRandTTE.R` | `runIRandTTEAnalysis()` | Incidence rates (Poisson CI) and Kaplan-Meier time-to-event for the safety outcomes. |
 | `R/runCohortMethodAnalysis.R` | `runCohortMethodAnalysis()` | Comparative effectiveness (denosumab vs ZA): LASSO propensity scores, matching/weighting, Cox models. |
 | `R/runTreatmentPatternAnalysis.R` | `runTreatmentPatternAnalysis()` | Dosing-regimen (continuous-exposure) episodes by interval band, and denosumab/ZA switching. |

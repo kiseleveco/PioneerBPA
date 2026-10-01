@@ -82,6 +82,7 @@ generateCohorts <- FALSE
 createTargetTable <- TRUE
 createDerivedCohorts <- TRUE
 runDiagnostics <- FALSE
+runDrugExposureDiagnostics <- FALSE
 runIRandTTEAnalysis <- FALSE
 runComparativeEffectiveness <- FALSE
 runTreatmentPatterns <- FALSE
@@ -131,6 +132,7 @@ PioneerBPA::execute(
   createTargetTable        = createTargetTable,
   createDerivedCohorts     = createDerivedCohorts,
   runDiagnostics           = runDiagnostics,
+  runDrugExposureDiagnostics = runDrugExposureDiagnostics,
   runIRandTTEAnalysis      = runIRandTTEAnalysis,
   runComparativeEffectiveness = runComparativeEffectiveness,
   runTreatmentPatterns        = runTreatmentPatterns,
