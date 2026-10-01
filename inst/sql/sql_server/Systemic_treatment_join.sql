@@ -12,8 +12,8 @@ LEFT JOIN (
   INNER JOIN @cohort_database_schema.@target_table tt
     ON tt.subject_id = c.subject_id
   WHERE c.cohort_definition_id = @cohort_adt
-    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.bone_date)
-    AND c.cohort_start_date <= DATEADD(DAY,  90, tt.bone_date)
+    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.metastasis_date)
+    AND c.cohort_start_date <= DATEADD(DAY, 180, tt.metastasis_date)
   GROUP BY c.subject_id
 ) adt ON adt.subject_id = t.subject_id
 LEFT JOIN (
@@ -22,8 +22,8 @@ LEFT JOIN (
   INNER JOIN @cohort_database_schema.@target_table tt
     ON tt.subject_id = c.subject_id
   WHERE c.cohort_definition_id = @cohort_arpi
-    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.bone_date)
-    AND c.cohort_start_date <= DATEADD(DAY,  90, tt.bone_date)
+    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.metastasis_date)
+    AND c.cohort_start_date <= DATEADD(DAY, 180, tt.metastasis_date)
   GROUP BY c.subject_id
 ) arpi ON arpi.subject_id = t.subject_id
 LEFT JOIN (
@@ -32,8 +32,8 @@ LEFT JOIN (
   INNER JOIN @cohort_database_schema.@target_table tt
     ON tt.subject_id = c.subject_id
   WHERE c.cohort_definition_id = @cohort_chemo
-    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.bone_date)
-    AND c.cohort_start_date <= DATEADD(DAY,  90, tt.bone_date)
+    AND c.cohort_start_date >= DATEADD(DAY, -30, tt.metastasis_date)
+    AND c.cohort_start_date <= DATEADD(DAY, 180, tt.metastasis_date)
   GROUP BY c.subject_id
 ) chemo ON chemo.subject_id = t.subject_id;
 DROP TABLE IF EXISTS @cohort_database_schema.@target_table;
