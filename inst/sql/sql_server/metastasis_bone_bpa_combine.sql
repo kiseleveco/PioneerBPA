@@ -27,6 +27,14 @@ LEFT JOIN (
       ON tt.subject_id = c.subject_id
     WHERE c.cohort_definition_id = @bpa_za
       AND c.cohort_start_date >= DATEADD(DAY, -30, tt.bone_date)
+      -- new user only: exclude anyone whose FIRST-EVER ZA dose predates the window
+      AND NOT EXISTS (
+        SELECT 1
+        FROM @cohort_database_schema.@cohort_table p
+        WHERE p.subject_id           = c.subject_id
+          AND p.cohort_definition_id = @bpa_za
+          AND p.cohort_start_date    < DATEADD(DAY, -30, tt.bone_date)
+      )
   ) x
   WHERE rn = 1
 ) za ON za.subject_id = t.subject_id
@@ -40,6 +48,14 @@ LEFT JOIN (
       ON tt.subject_id = c.subject_id
     WHERE c.cohort_definition_id = @bpa_denosumab
       AND c.cohort_start_date >= DATEADD(DAY, -30, tt.bone_date)
+      -- new user only: exclude anyone whose FIRST-EVER denosumab dose predates the window
+      AND NOT EXISTS (
+        SELECT 1
+        FROM @cohort_database_schema.@cohort_table p
+        WHERE p.subject_id           = c.subject_id
+          AND p.cohort_definition_id = @bpa_denosumab
+          AND p.cohort_start_date    < DATEADD(DAY, -30, tt.bone_date)
+      )
   ) x
   WHERE rn = 1
 ) denosumab ON denosumab.subject_id = t.subject_id;

@@ -41,18 +41,18 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 # ------------------------------------------------------------------------------
 # 2. Schema and table names
 # ------------------------------------------------------------------------------
-cdmDatabaseSchema        <- "marketscan_ccaemdcr_aug2025"         # read-only CDM
+cdmDatabaseSchema        <- "marketscan_ccaemdcr_prod_merged"         # read-only CDM
 vocabularyDatabaseSchema <- cdmDatabaseSchema                     # usually same as CDM
 cohortDatabaseSchema     <- "marketscan_ccaemdcr_aug2025_results" # write-enabled; needs read/write/delete
 cohortTable              <- "cohortBPA"
 cohortTableNew           <- "cohortTableNew"
 targetTable              <- "targetTable"
 
-databaseId          <- "MarketScan2025"           # short identifier, no spaces
-databaseName        <- "MarketScan aug2025"
-databaseDescription <- "MarketScan aug2025"
+databaseId          <- "MarketScan_combined_2026"           # short identifier, no spaces
+databaseName        <- "MarketScan combined 2026"
+databaseDescription <- "MarketScan combined 2026"
 
-outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA_sensitivity"))
+outputFolder <- file.path("/home/a_kiselev/output", paste0(databaseId, "_BPA_v0.1"))
 
 # Temp table emulation (Oracle / some Spark configs)
 options(sqlRenderTempEmulationSchema = NULL)
@@ -71,20 +71,20 @@ chemo             <- 1774
 #Sensitivity arguments
 bpaAa <- 1823
 bpaAll  <- 1822
-sensitivity <- TRUE
+sensitivity <- FALSE
 
 # ------------------------------------------------------------------------------
 # 4. Run options
 # ------------------------------------------------------------------------------
-includeCohortStats <- FALSE
+includeCohortStats <- TRUE
 incrementalCohorts <- TRUE
-generateCohorts <- TRUE
+generateCohorts <- FALSE
 createTargetTable <- TRUE
 createDerivedCohorts <- TRUE
-runDiagnostics <- TRUE
+runDiagnostics <- FALSE
 runIRandTTEAnalysis <- FALSE
 runComparativeEffectiveness <- FALSE
-runTreatmentPatterns <- TRUE
+runTreatmentPatterns <- FALSE
 
 ## Comparative effectiveness (denosumab vs ZA) options
 ## RxNorm INGREDIENT concept ids for denosumab and zoledronic acid (and their
