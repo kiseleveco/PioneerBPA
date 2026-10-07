@@ -203,8 +203,14 @@ last-dose span and dose count over the whole arm) and `NO_REGIMEN` (the same for
 patients who match no band). It also detects **switching** to the other agent
 more than 30 days after index.
 
+It also reports the **time from the bone-metastasis date to the first BPA
+administration** (cohort `90100` → `90200`), overall and by first agent: number
+of individuals, mean with a t-based 95% CI, SD, median and interquartile range.
+Values can be negative, because the BPA window opens 30 days before the
+bone-metastasis date.
+
 Outputs land in `<outputFolder>/treatmentPatterns/`:
-`treatmentPatternRegimens.csv` and `treatmentSwitch.csv`.
+`treatmentPatternRegimens.csv`, `treatmentSwitch.csv` and `timeToFirstBpa.csv`.
 
 ## Refreshing cohort definitions from Atlas
 

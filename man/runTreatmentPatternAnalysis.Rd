@@ -49,6 +49,11 @@ episode is a maximal run of consecutive administrations whose gaps all fall in
 the same band, so different regimens are never merged. Per arm it reports one
 row per band plus \code{ALL} and \code{NO_REGIMEN} summary rows, and it detects
 switches to the other agent occurring more than \code{graceDays} after index.
+It also summarises the time from the bone-metastasis date (cohort 90100) to the
+first BPA administration (cohort 90200), overall and by first agent (mean with a
+t-based 95\% CI, SD, median, Q1, Q3 and IQR), written to
+\code{timeToFirstBpa.csv}; values can be negative because the BPA window opens
+30 days before the bone-metastasis date.
 Only aggregated results are written; rows below \code{minCellCount} are
 suppressed.
 }
